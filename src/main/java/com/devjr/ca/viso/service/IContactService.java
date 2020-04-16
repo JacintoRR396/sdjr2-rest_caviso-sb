@@ -10,7 +10,7 @@ public interface IContactService {
 
 	ContactEntity findById(Integer id);
 
-	void save(ContactEntity value);
+	ContactEntity save(ContactEntity value);
 
 	void deleteById(Integer id);
 

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.devjr.ca.viso.entity.ContactEntity;
@@ -15,7 +16,7 @@ import com.devjr.ca.viso.zutils.UtilsLanguage;
 @Service
 public class ContactServiceImpl implements IContactService {
 
-	private static Logger LOG = LoggerFactory.getLogger(ContactServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ContactServiceImpl.class);
 
 	@Autowired
 	private IContactRepo repo;
@@ -39,16 +40,21 @@ public class ContactServiceImpl implements IContactService {
 	}
 
 	@Override
-	public void save(final ContactEntity value) {
+	public ContactEntity save(final ContactEntity value) {
 		final ContactEntity entity = this.repo.save(value);
-		if (entity == null) {
-			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_ADD_UPDATE_BBDD);
-		}
+		if (entity != null)
+			return entity;
+		ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_ADD_UPDATE_BBDD);
+		return null;
 	}
 
 	@Override
 	public void deleteById(final Integer id) {
-		this.repo.deleteById(id);
+		try {
+			this.repo.deleteById(id);
+		} catch (final EmptyResultDataAccessException e) {
+			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_DELETE_BBDD);
+		}
 	}
 
 }
