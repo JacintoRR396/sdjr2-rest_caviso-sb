@@ -6,4 +6,6 @@ import com.devjr.ca.viso.entity.ContactEntity;
 
 public interface IContactRepo extends JpaRepository<ContactEntity, Integer> {
 
+//	List<ContactEntity> findAllOrderByEmail();
+
 }

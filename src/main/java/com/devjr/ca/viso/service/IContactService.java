@@ -2,15 +2,17 @@ package com.devjr.ca.viso.service;
 
 import java.util.List;
 
-import com.devjr.ca.viso.entity.ContactEntity;
+import com.devjr.ca.viso.domain.Contact;
 
 public interface IContactService {
 
-	List<ContactEntity> findAll();
+	List<Contact> findAll();
 
-	ContactEntity findById(Integer id);
+	// List<ContactEntity> findAllOrderByEmail();
 
-	ContactEntity save(ContactEntity value);
+	Contact findById(Integer id);
+
+	Contact save(Contact value);
 
 	void deleteById(Integer id);
 

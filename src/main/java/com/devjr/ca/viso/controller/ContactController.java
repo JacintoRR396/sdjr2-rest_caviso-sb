@@ -2,6 +2,7 @@ package com.devjr.ca.viso.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devjr.ca.viso.entity.ContactEntity;
+import com.devjr.ca.viso.domain.Contact;
 import com.devjr.ca.viso.service.IContactService;
 
 @RestController
@@ -30,14 +31,15 @@ public class ContactController {
 	@Autowired
 	private IContactService service;
 
+	/*********** GET ***********/
 	@GetMapping()
-	public List<ContactEntity> getAll() {
-		return this.service.findAll();
+	public ResponseEntity<List<Contact>> getAll() {
+		return ResponseEntity.ok().body(this.service.findAll());
 	}
 
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<ContactEntity> get(@PathVariable("id") final Integer id) {
-		final ContactEntity entity = this.service.findById(id);
+	@GetMapping("/{id}")
+	public ResponseEntity<Contact> get(@PathVariable("id") final Integer id) {
+		final Contact entity = this.service.findById(id);
 		if (entity != null)
 			return new ResponseEntity<>(entity, HttpStatus.OK);
 		else
@@ -46,19 +48,18 @@ public class ContactController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ContactEntity insert(@RequestBody final ContactEntity value) {
-		return this.service.save(value);
+	public ResponseEntity<Contact> insert(@RequestBody final Contact value) {
+		return ResponseEntity.ok().body(this.service.save(value));
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON)
-	public ContactEntity updateAll(@RequestBody final ContactEntity value) {
-		return this.service.save(value);
+	public ResponseEntity<Contact> updateAll(@Valid @RequestBody final Contact value) {
+		return ResponseEntity.ok().body(this.service.save(value));
 	}
 
 	@PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON)
-	public ResponseEntity<ContactEntity> update(@PathVariable("id") final Integer id,
-			@RequestBody final ContactEntity value) {
-		final ContactEntity entity = this.service.findById(id);
+	public ResponseEntity<Contact> update(@PathVariable("id") final Integer id, @RequestBody final Contact value) {
+		final Contact entity = this.service.findById(id);
 		if (entity != null) {
 			if (value.getEmail() != null) {
 				entity.setEmail(value.getEmail());
