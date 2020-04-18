@@ -8,7 +8,11 @@ public interface IContactService {
 
 	List<Contact> findAll();
 
-	// List<ContactEntity> findAllOrderByEmail();
+	List<Contact> findAllOrderByEmail();
+
+	List<Contact> searchByPhoneMobile(final String phoneMobile);
+
+	List<Contact> searchByPhoneHome(final String phoneHome);
 
 	Contact findById(Integer id);
 

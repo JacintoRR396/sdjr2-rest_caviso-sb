@@ -1,99 +1,48 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-securtiy">
+	
     <head>
         <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <meta charset="utf-8" />
+    	<title>Club Atletismo Viso</title>
+    	<base href="/" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<link rel="icon" type="image/x-icon" href="ic-logo_caviso-32x32.png" />
+	    <meta name="description" content="Web que gestiona y proporciona info sobre el Club Atletismo Viso" />
+	    <meta name="keywords" content="Club Atletismo Viso Deporte Correr" />
+	    <meta name="author" content="Jacinto Roldán Rodríguez" />
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/videojuegos.css">
-
-        <title>Tienda VJ</title>
+        <!-- Project CSS -->
+        <link rel="stylesheet" th:href="@{/styles/main.css}" />
     </head>
     <body>
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
-                <img src="img/logo.png" width="30" height="30" alt="">
-                Tienda VJ
+                <img th:src="@{/images/logo_viso-100x160.png}" width="30" height="30" alt="LCAV">
+                Club Atletismo Viso
             </a>
         </nav>
 
         <div class="container mt-4 vj-destacados">
             <div class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="https://cdn.gbposters.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/f/p/fp4825-borderlands-3-cover.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Borderlands 3</h5>
-                            <p class="card-text">¡Vuelve el padre de los shooter-looter, con tropecientas mil armas y una aventura caótica!</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-primary">Ver detalles</a>
-                        </div>                        
-                    </div>
+                <div th:each="contact : ${contacts}" class="col-md-3 mb-4">
+                    <form class="form-inline">
+					  <label class="sr-only" for="email">Email</label>
+					  <input th:text=${contact.email} type="text" class="form-control mb-2 mr-sm-2" id="email" placeholder="email@domain.ext">
+					
+					  <label class="sr-only" for="phoneMovil">Phone Movil</label>
+					  <input th:text=${contact.phoneMovil} type="text" class="form-control mb-2 mr-sm-2" id="phoneMovil" placeholder="666333111">
+					  
+					  <label class="sr-only" for="phoneHome">Phone Home</label>
+					  <input th:text=${contact.phoneHome} type="text" class="form-control mb-2 mr-sm-2" id="phoneHome" placeholder="955741000">
+					
+					  <button type="submit" class="btn btn-primary mb-2">Submit</button>
+					</form>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card ">
-                        <img src="https://media.playstation.com/is/image/SCEA/control-poster-01-ps4-us-11sep19?$native_nt$" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Control</h5>
-                            <p class="card-text">Tras la invasión de una agencia secreta de Nueva York por parte de una amenaza de otro mundo, te conviertes en la nueva directora que deberá luchar para recuperar Control.</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-primary">Ver detalles</a>
-                        </div>                                        
-                    </div>                  
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card ">
-                        <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/ES/es/999/EP5426-CUSA13893_00-2222444466669999/1568624921000/image?w=240&h=240&bg_color=000000&opacity=100&_version=00_09_000" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Subnautica</h5>
-                            <p class="card-text">Un juego de aventuras submarinas ambientado en un mundo oceánico alienígena. ¡Te espera un mundo abierto enorme lleno de maravillas y peligros! </p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-primary">Ver detalles</a>
-                        </div>                    
-                    </div>                
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card ">
-                        <img src="https://www.mobygames.com/images/covers/l/323028-firewatch-playstation-4-front-cover.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Firewatch</h5>
-                            <p class="card-text">Firewatch es un juego de misterio en primera persona para un jugador que se desarrolla en la selva de Wyoming</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-primary">Ver detalles</a>
-                        </div>                                        
-                    </div>                   
-                </div>                
-                <div class="col-md-3">
-                    <div class="card ">
-                        <img src="https://www.mobygames.com/images/covers/l/323028-firewatch-playstation-4-front-cover.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Firewatch</h5>
-                            <p class="card-text">Firewatch es un juego de misterio en primera persona para un jugador que se desarrolla en la selva de Wyoming</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-primary">Ver detalles</a>
-                        </div>                                        
-                    </div>                   
-                </div>                
-                <div class="col-md-3">
-                    <div class="card ">
-                        <img src="https://www.mobygames.com/images/covers/l/323028-firewatch-playstation-4-front-cover.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Firewatch</h5>
-                            <p class="card-text">Firewatch es un juego de misterio en primera persona para un jugador que se desarrolla en la selva de Wyoming</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-primary">Ver detalles</a>
-                        </div>                                        
-                    </div>                   
-                </div>                
-            </div>
+            </div>    
         </div>
 
         <!-- Optional JavaScript -->

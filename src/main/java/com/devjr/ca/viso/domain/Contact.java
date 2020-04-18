@@ -1,35 +1,45 @@
 package com.devjr.ca.viso.domain;
 
+import java.util.Comparator;
+
 import javax.validation.constraints.Pattern;
 
 import com.devjr.ca.viso.zutils.UtilsRegExp;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Contact {
+/**
+ * Representa los Medios de Contacto de una Persona Física/Jurídica o Carrera.
+ *
+ * @author Jacinto R^2
+ * @version 1.0
+ * @since 18/04/2020
+ * @modify 18/04/2020
+ */
+public class Contact implements Comparable<Contact> {
 
 	/* VARIABLES */
-	private Integer id;
+	private final Integer id;
 	@Pattern(regexp = UtilsRegExp.EMAIL_REGEX)
-	private String email;
-	@Pattern(regexp = UtilsRegExp.PHONE_MOVIL_REGEX)
-	private String tlfMovil;
+	private final String email;
+	@Pattern(regexp = UtilsRegExp.PHONE_MOBILE_REGEX)
+	private final String phoneMobile;
 	@Pattern(regexp = UtilsRegExp.PHONE_HOME_REGEX)
-	private String tlfHome;
+	private final String phoneHome;
 
 	/* CONSTRUCTORS */
 	@JsonCreator
 	public Contact(@JsonProperty("id") final Integer id, @JsonProperty("email") final String email,
-			@JsonProperty("tlfMovil") final String tlfMovil, @JsonProperty("tlfHome") final String tlfHome) {
+			@JsonProperty("phoneMobile") final String phoneMobile, @JsonProperty("phoneHome") final String phoneHome) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.tlfMovil = tlfMovil;
-		this.tlfHome = tlfHome;
+		this.phoneMobile = phoneMobile;
+		this.phoneHome = phoneHome;
 	}
 
-	public Contact(final Integer id, final String email) {
-		this(id, email, null, null);
+	public Contact(final Builder builder) {
+		this(builder.id, builder.email, builder.phoneMobile, builder.phoneHome);
 	}
 
 	/* GETTERS AND SETTERS */
@@ -37,32 +47,16 @@ public class Contact {
 		return this.id;
 	}
 
-	public void setId(final Integer id) {
-		this.id = id;
-	}
-
 	public String getEmail() {
 		return this.email;
 	}
 
-	public void setEmail(final String email) {
-		this.email = email;
+	public String getPhoneMobile() {
+		return this.phoneMobile;
 	}
 
-	public String getTlfMovil() {
-		return this.tlfMovil;
-	}
-
-	public void setTlfMovil(final String tlfMovil) {
-		this.tlfMovil = tlfMovil;
-	}
-
-	public String getTlfHome() {
-		return this.tlfHome;
-	}
-
-	public void setTlfHome(final String tlfHome) {
-		this.tlfHome = tlfHome;
+	public String getPhoneHome() {
+		return this.phoneHome;
 	}
 
 	/* METHODS OF INSTANCE */
@@ -72,8 +66,8 @@ public class Contact {
 		int result = 1;
 		result = (prime * result) + ((this.id == null) ? 0 : this.id.hashCode());
 		result = (prime * result) + ((this.email == null) ? 0 : this.email.hashCode());
-		result = (prime * result) + ((this.tlfMovil == null) ? 0 : this.tlfMovil.hashCode());
-		result = (prime * result) + ((this.tlfHome == null) ? 0 : this.tlfHome.hashCode());
+		result = (prime * result) + ((this.phoneMobile == null) ? 0 : this.phoneMobile.hashCode());
+		result = (prime * result) + ((this.phoneHome == null) ? 0 : this.phoneHome.hashCode());
 		return result;
 	}
 
@@ -84,14 +78,86 @@ public class Contact {
 		if (!(obj instanceof Contact))
 			return false;
 		final Contact other = (Contact) obj;
-		return this.id.equals(other.id) && this.email.equals(other.email) && this.tlfMovil.equals(other.tlfMovil)
-				&& this.tlfHome.equals(other.tlfHome);
+		return this.id.equals(other.id) && this.email.equals(other.email) && this.phoneMobile.equals(other.phoneMobile)
+				&& this.phoneHome.equals(other.phoneHome);
 	}
 
 	@Override
 	public String toString() {
-		return "Contact [id=" + this.id + ", email=" + this.email + ", tlfMovil=" + this.tlfMovil + ", tlfHome="
-				+ this.tlfHome + "]";
+		final StringBuilder res = new StringBuilder(
+				"The Objet '" + this.getClass().getSimpleName() + "' contains the attributes: \n");
+		res.append(" - Id » " + this.id + ".\n");
+		res.append(" - Email » " + this.email + ".\n");
+		res.append(" - Phone Mobile » " + this.phoneMobile + ".\n");
+		res.append(" - Phone Home » " + this.phoneHome + ".\n");
+		return res.toString();
+	}
+
+	@Override
+	public int compareTo(final Contact oContact) {
+		return oContact.getEmail().compareTo(oContact.getEmail());
+	}
+
+	public Builder builder() {
+		return new Builder(this);
+	}
+
+	/* METHODS OF CLASSES */
+	public static Contact valueOf(final Contact oContact) {
+		return new Contact(oContact.getId(), oContact.getEmail(), oContact.getPhoneMobile(), oContact.getPhoneHome());
+	}
+
+	public static final Comparator<Contact> phoneMobileComparatorASC = (final Contact oContact1,
+			final Contact oContact2) -> oContact1.getPhoneMobile().toUpperCase()
+					.compareTo(oContact2.getPhoneHome().toUpperCase());
+	public static final Comparator<Contact> phoneMobileComparatorDESC = (final Contact oContact1,
+			final Contact oContact2) -> oContact2.getPhoneMobile().toUpperCase()
+					.compareTo(oContact1.getPhoneHome().toUpperCase());
+
+	/* INTERNAL CLASS */
+	public static class Builder {
+
+		private Integer id;
+		private String email;
+		private String phoneMobile;
+		private String phoneHome;
+
+		public Builder() {
+			super();
+		}
+
+		public Builder(final Contact object) {
+			super();
+			this.id = object.id;
+			this.email = object.email;
+			this.phoneMobile = object.phoneMobile;
+			this.phoneHome = object.phoneHome;
+		}
+
+		public Builder withId(final Integer id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withEmail(final String email) {
+			this.email = email;
+			return this;
+		}
+
+		public Builder withPhoneMobile(final String phoneMobile) {
+			this.phoneMobile = phoneMobile;
+			return this;
+		}
+
+		public Builder withPhoneHome(final String phoneHome) {
+			this.phoneHome = phoneHome;
+			return this;
+		}
+
+		public Contact build() {
+			return new Contact(this);
+		}
+
 	}
 
 }
