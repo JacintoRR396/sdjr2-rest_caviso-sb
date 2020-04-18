@@ -42,14 +42,38 @@ public class ContactServiceImpl implements IContactService {
 		return list;
 	}
 
-//	@Override
-//	public List<ContactEntity> findAllOrderByEmail() {
-//		final List<ContactEntity> list = this.repo.findAllOrderByEmail();
-//		if (list.isEmpty()) {
-//			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_GET_ALL_BBDD);
-//		}
-//		return list;
-//	}
+	@Override
+	public List<Contact> findAllOrderByEmail() {
+		final List<ContactEntity> listDAO = this.repo.findAllOrderByEmail();
+		final List<Contact> list = listDAO.stream().map(ce -> this.converterResponse.convert(ce))
+				.collect(Collectors.toList());
+		if (list.isEmpty()) {
+			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_GET_ALL_BBDD);
+		}
+		return list;
+	}
+
+	@Override
+	public List<Contact> searchByPhoneMobile(final String phoneMobile) {
+		final List<ContactEntity> listDAO = this.repo.searchPhoneMovil(phoneMobile);
+		final List<Contact> list = listDAO.stream().map(ce -> this.converterResponse.convert(ce))
+				.collect(Collectors.toList());
+		if (list.isEmpty()) {
+			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_GET_ALL_BBDD);
+		}
+		return list;
+	}
+
+	@Override
+	public List<Contact> searchByPhoneHome(final String phoneHome) {
+		final List<ContactEntity> listDAO = this.repo.findByPhoneHomeContainingOrderByEmailAsc(phoneHome);
+		final List<Contact> list = listDAO.stream().map(ce -> this.converterResponse.convert(ce))
+				.collect(Collectors.toList());
+		if (list.isEmpty()) {
+			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_GET_ALL_BBDD);
+		}
+		return list;
+	}
 
 	@Override
 	public Contact findById(final Integer id) {

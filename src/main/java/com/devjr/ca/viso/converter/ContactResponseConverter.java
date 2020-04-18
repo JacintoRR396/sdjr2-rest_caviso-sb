@@ -11,7 +11,7 @@ public class ContactResponseConverter implements Converter<ContactEntity, Contac
 
 	@Override
 	public Contact convert(final ContactEntity source) {
-		return new Contact(source.getId(), source.getEmail(), source.getTlfMovil(), source.getTlfHome());
+		return new Contact(source.getId(), source.getEmail(), source.getPhoneMobile(), source.getPhoneHome());
 	}
 
 }

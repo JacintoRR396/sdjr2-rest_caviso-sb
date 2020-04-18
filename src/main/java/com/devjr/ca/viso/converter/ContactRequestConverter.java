@@ -14,8 +14,8 @@ public class ContactRequestConverter implements Converter<Contact, ContactEntity
 		final ContactEntity entity = new ContactEntity();
 		entity.setId(source.getId());
 		entity.setEmail(source.getEmail());
-		entity.setTlfMovil(source.getTlfMovil());
-		entity.setTlfHome(source.getTlfHome());
+		entity.setPhoneMobile(source.getPhoneMobile());
+		entity.setPhoneHome(source.getPhoneHome());
 		return entity;
 	}
 

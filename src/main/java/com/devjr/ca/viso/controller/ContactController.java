@@ -37,6 +37,21 @@ public class ContactController {
 		return ResponseEntity.ok().body(this.service.findAll());
 	}
 
+	@GetMapping("/orderByEmail")
+	public ResponseEntity<List<Contact>> getAllOrderByEmail() {
+		return ResponseEntity.ok().body(this.service.findAllOrderByEmail());
+	}
+
+	@GetMapping("/searchByPhoneMobile/{phoneMobile}")
+	public ResponseEntity<List<Contact>> getAllByPhoneMovil(@PathVariable("phoneMobile") final String phoneMobile) {
+		return ResponseEntity.ok().body(this.service.searchByPhoneMobile(phoneMobile));
+	}
+
+	@GetMapping("/searchByPhoneHome/{phoneHome}")
+	public ResponseEntity<List<Contact>> getAllByPhoneHome(@PathVariable("phoneHome") final String phoneHome) {
+		return ResponseEntity.ok().body(this.service.searchByPhoneHome(phoneHome));
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Contact> get(@PathVariable("id") final Integer id) {
 		final Contact entity = this.service.findById(id);
@@ -46,35 +61,40 @@ public class ContactController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
+	/*********** PSOT ***********/
 	@PostMapping(consumes = MediaType.APPLICATION_JSON)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Contact> insert(@RequestBody final Contact value) {
 		return ResponseEntity.ok().body(this.service.save(value));
 	}
 
+	/*********** PUT ***********/
 	@PutMapping(consumes = MediaType.APPLICATION_JSON)
 	public ResponseEntity<Contact> updateAll(@Valid @RequestBody final Contact value) {
 		return ResponseEntity.ok().body(this.service.save(value));
 	}
 
+	/*********** PATCH ***********/
 	@PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON)
 	public ResponseEntity<Contact> update(@PathVariable("id") final Integer id, @RequestBody final Contact value) {
-		final Contact entity = this.service.findById(id);
+		final Contact entityDAO = this.service.findById(id);
+		final Contact.Builder entity = Contact.valueOf(entityDAO).builder();
 		if (entity != null) {
 			if (value.getEmail() != null) {
-				entity.setEmail(value.getEmail());
+				entity.withEmail(value.getEmail());
 			}
-			if (value.getTlfMovil() != null) {
-				entity.setTlfMovil(value.getTlfMovil());
+			if (value.getPhoneMobile() != null) {
+				entity.withPhoneMobile(value.getPhoneMobile());
 			}
-			if (value.getTlfHome() != null) {
-				entity.setTlfHome(value.getTlfHome());
+			if (value.getPhoneHome() != null) {
+				entity.withPhoneHome(value.getPhoneHome());
 			}
-			return new ResponseEntity<>(this.service.save(entity), HttpStatus.OK);
+			return new ResponseEntity<>(this.service.save(entity.build()), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
+	/*********** DELETE ***********/
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") final Integer id) {
