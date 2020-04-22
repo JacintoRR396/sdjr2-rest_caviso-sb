@@ -7,6 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.devjr.ca.viso.entity.ContactEntity;
 
+/**
+ * Representa el Repositorio JPA respecto a los Medios de Contacto de una
+ * Persona Física/Jurídica o Carrera.
+ *
+ * @author Jacinto R^2
+ * @version 1.0
+ * @since 18/04/2020
+ * @modify 18/04/2020
+ */
 public interface IContactRepo extends JpaRepository<ContactEntity, Integer> {
 
 	@Query("from ContactEntity ce order by ce.email")

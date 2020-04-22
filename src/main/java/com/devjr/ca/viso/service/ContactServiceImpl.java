@@ -17,6 +17,15 @@ import com.devjr.ca.viso.entity.ContactEntity;
 import com.devjr.ca.viso.repository.IContactRepo;
 import com.devjr.ca.viso.zutils.UtilsLanguage;
 
+/**
+ * Representa el Servicio respecto a los Medios de Contacto de una Persona
+ * Física/Jurídica o Carrera.
+ *
+ * @author Jacinto R^2
+ * @version 1.0
+ * @since 18/04/2020
+ * @modify 18/04/2020
+ */
 @Service
 public class ContactServiceImpl implements IContactService {
 

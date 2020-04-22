@@ -23,6 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devjr.ca.viso.domain.Contact;
 import com.devjr.ca.viso.service.IContactService;
 
+/**
+ * Representa el Controlador respecto a los Medios de Contacto de una Persona
+ * Física/Jurídica o Carrera.
+ *
+ * @author Jacinto R^2
+ * @version 1.0
+ * @since 18/04/2020
+ * @modify 18/04/2020
+ */
 @RestController
 @RequestMapping(path = "/contacts", produces = MediaType.APPLICATION_JSON)
 @CrossOrigin(origins = "*")
