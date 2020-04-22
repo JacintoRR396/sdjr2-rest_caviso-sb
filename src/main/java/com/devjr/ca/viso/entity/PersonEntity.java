@@ -42,6 +42,9 @@ public class PersonEntity {
 	@Column(name = "birthdate", nullable = false)
 	private LocalDate birthdate;
 
+	@Column(name = "balance", nullable = true, length = 7)
+	private Float balance;
+
 	@Column(name = "path_image", nullable = true, length = 250)
 	private String pathImage;
 
@@ -99,6 +102,14 @@ public class PersonEntity {
 
 	public void setBirthdate(final LocalDate birthdate) {
 		this.birthdate = birthdate;
+	}
+
+	public Float getBalance() {
+		return this.balance;
+	}
+
+	public void setBalance(final Float balance) {
+		this.balance = balance;
 	}
 
 	public String getPathImage() {

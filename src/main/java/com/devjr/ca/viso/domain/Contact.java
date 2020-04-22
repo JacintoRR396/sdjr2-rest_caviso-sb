@@ -6,19 +6,24 @@ import javax.validation.constraints.Pattern;
 
 import com.devjr.ca.viso.zutils.UtilsRegExp;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Representa los Medios de Contacto de una Persona Física/Jurídica o Carrera.
+ * Representa el Dominio respecto a los Medios de Contacto de una Persona
+ * Física/Jurídica o Carrera.
  *
  * @author Jacinto R^2
  * @version 1.0
  * @since 18/04/2020
  * @modify 18/04/2020
  */
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Contact implements Comparable<Contact> {
 
 	/* VARIABLES */
+	@Pattern(regexp = UtilsRegExp.INDEX_REGEX)
 	private final Integer id;
 	@Pattern(regexp = UtilsRegExp.EMAIL_REGEX)
 	private final String email;
@@ -94,8 +99,8 @@ public class Contact implements Comparable<Contact> {
 	}
 
 	@Override
-	public int compareTo(final Contact oContact) {
-		return oContact.getEmail().compareTo(oContact.getEmail());
+	public int compareTo(final Contact obj) {
+		return this.getEmail().compareTo(obj.getEmail());
 	}
 
 	public Builder builder() {
@@ -103,16 +108,16 @@ public class Contact implements Comparable<Contact> {
 	}
 
 	/* METHODS OF CLASSES */
-	public static Contact valueOf(final Contact oContact) {
-		return new Contact(oContact.getId(), oContact.getEmail(), oContact.getPhoneMobile(), oContact.getPhoneHome());
+	public static Contact valueOf(final Contact obj) {
+		return new Contact(obj.getId(), obj.getEmail(), obj.getPhoneMobile(), obj.getPhoneHome());
 	}
 
-	public static final Comparator<Contact> phoneMobileComparatorASC = (final Contact oContact1,
-			final Contact oContact2) -> oContact1.getPhoneMobile().toUpperCase()
-					.compareTo(oContact2.getPhoneHome().toUpperCase());
-	public static final Comparator<Contact> phoneMobileComparatorDESC = (final Contact oContact1,
-			final Contact oContact2) -> oContact2.getPhoneMobile().toUpperCase()
-					.compareTo(oContact1.getPhoneHome().toUpperCase());
+	public static final Comparator<Contact> phoneMobileComparatorASC = (final Contact obj1,
+			final Contact obj2) -> obj1.getPhoneMobile().toUpperCase()
+					.compareTo(obj2.getPhoneHome().toUpperCase());
+	public static final Comparator<Contact> phoneMobileComparatorDESC = (final Contact obj1,
+			final Contact obj2) -> obj2.getPhoneMobile().toUpperCase()
+					.compareTo(obj1.getPhoneHome().toUpperCase());
 
 	/* INTERNAL CLASS */
 	public static class Builder {

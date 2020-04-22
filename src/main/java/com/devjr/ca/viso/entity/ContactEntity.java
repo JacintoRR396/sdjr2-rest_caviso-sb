@@ -7,6 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Representa al DAO respecto a los Medios de Contacto de una Persona
+ * Física/Jurídica o Carrera.
+ *
+ * @author Jacinto R^2
+ * @version 1.0
+ * @since 18/04/2020
+ * @modify 18/04/2020
+ */
 @Entity
 @Table(name = "contact", schema = "db_ca_viso")
 public class ContactEntity {

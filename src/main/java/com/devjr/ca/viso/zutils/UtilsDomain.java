@@ -1,4 +1,4 @@
-package com.devjr.ca.viso.domain;
+package com.devjr.ca.viso.zutils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -67,6 +67,10 @@ public class UtilsDomain {
 			sRes += Character.toLowerCase(sWord.charAt(i));
 		}
 		return sRes;
+	}
+
+	private UtilsDomain() {
+		throw new IllegalStateException("Utility class");
 	}
 
 }
