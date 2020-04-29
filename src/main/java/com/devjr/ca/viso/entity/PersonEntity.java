@@ -16,113 +16,132 @@ import javax.persistence.Table;
 
 import com.devjr.ca.viso.domain.EPersonDocument;
 
+/**
+ * Representa al DAO respecto a una Persona Genérica.
+ *
+ * @author Jacinto R^2
+ * @version 1.0
+ * @since 18/04/2020
+ * @modify 23/04/2020
+ */
 @Entity
 @Table(name = "person", schema = "db_ca_viso")
-public class PersonEntity {
+public class PersonEntity{
 
-	/* VARIABLES */
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_person", unique = true, updatable = false, nullable = false)
-	private Integer id;
+    /* VARIABLES */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_person", unique = true, updatable = false, nullable = false)
+    private Integer id;
 
-	@Column(name = "document_type", nullable = false, length = 3)
-	@Enumerated(value = EnumType.STRING)
-	private EPersonDocument documentType;
+    @Column(name = "document_type", nullable = false, length = 3)
+    @Enumerated(value = EnumType.STRING)
+    private EPersonDocument documentType;
 
-	@Column(name = "document_number", unique = true, nullable = false, length = 12)
-	private String documentNumber;
+    @Column(name = "document_number", unique = true, nullable = false, length = 12)
+    private String documentNumber;
 
-	@Column(name = "name", nullable = false, length = 30)
-	private String name;
+    @Column(name = "name", nullable = false, length = 30)
+    private String name;
 
-	@Column(name = "surname", nullable = false, length = 50)
-	private String surname;
+    @Column(name = "surname", nullable = false, length = 50)
+    private String surname;
 
-	@Column(name = "birthdate", nullable = false)
-	private LocalDate birthdate;
+    @Column(name = "birthdate", nullable = false)
+    private LocalDate birthdate;
 
-	@Column(name = "path_image", nullable = true, length = 250)
-	private String pathImage;
+    @Column(name = "balance", nullable = true, length = 7)
+    private Float balance;
 
-	@Column(name = "description", nullable = true)
-	private String description;
+    @Column(name = "path_image", nullable = true, length = 250)
+    private String pathImage;
 
-	@OneToOne(targetEntity = ContactEntity.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_contact", nullable = false)
-	private ContactEntity contact;
+    @Column(name = "description", nullable = true)
+    private String description;
 
-	/* GETTERS AND SETTERS */
-	public Integer getId() {
-		return this.id;
-	}
+    @OneToOne(targetEntity = ContactEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_contact", nullable = false)
+    private ContactEntity contact;
 
-	public void setId(final Integer id) {
-		this.id = id;
-	}
+    /* GETTERS AND SETTERS */
+    public Integer getId(){
+        return this.id;
+    }
 
-	public EPersonDocument getDocumentType() {
-		return this.documentType;
-	}
+    public void setId(final Integer id){
+        this.id = id;
+    }
 
-	public void setDocumentType(final EPersonDocument documentType) {
-		this.documentType = documentType;
-	}
+    public EPersonDocument getDocumentType(){
+        return this.documentType;
+    }
 
-	public String getDocumentNumber() {
-		return this.documentNumber;
-	}
+    public void setDocumentType(final EPersonDocument documentType){
+        this.documentType = documentType;
+    }
 
-	public void setDocumentNumber(final String documentNumber) {
-		this.documentNumber = documentNumber;
-	}
+    public String getDocumentNumber(){
+        return this.documentNumber;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void setDocumentNumber(final String documentNumber){
+        this.documentNumber = documentNumber;
+    }
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+    public String getName(){
+        return this.name;
+    }
 
-	public String getSurname() {
-		return this.surname;
-	}
+    public void setName(final String name){
+        this.name = name;
+    }
 
-	public void setSurname(final String surname) {
-		this.surname = surname;
-	}
+    public String getSurname(){
+        return this.surname;
+    }
 
-	public LocalDate getBirthdate() {
-		return this.birthdate;
-	}
+    public void setSurname(final String surname){
+        this.surname = surname;
+    }
 
-	public void setBirthdate(final LocalDate birthdate) {
-		this.birthdate = birthdate;
-	}
+    public LocalDate getBirthdate(){
+        return this.birthdate;
+    }
 
-	public String getPathImage() {
-		return this.pathImage;
-	}
+    public void setBirthdate(final LocalDate birthdate){
+        this.birthdate = birthdate;
+    }
 
-	public void setPathImage(final String pathImage) {
-		this.pathImage = pathImage;
-	}
+    public Float getBalance(){
+        return this.balance;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    public void setBalance(final Float balance){
+        this.balance = balance;
+    }
 
-	public void setDescription(final String description) {
-		this.description = description;
-	}
+    public String getPathImage(){
+        return this.pathImage;
+    }
 
-	public ContactEntity getContact() {
-		return this.contact;
-	}
+    public void setPathImage(final String pathImage){
+        this.pathImage = pathImage;
+    }
 
-	public void setContact(final ContactEntity contact) {
-		this.contact = contact;
-	}
+    public String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(final String description){
+        this.description = description;
+    }
+
+    public ContactEntity getContact(){
+        return this.contact;
+    }
+
+    public void setContact(final ContactEntity contact){
+        this.contact = contact;
+    }
 
 }

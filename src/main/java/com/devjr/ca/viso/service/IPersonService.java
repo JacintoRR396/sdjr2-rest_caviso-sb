@@ -2,16 +2,16 @@ package com.devjr.ca.viso.service;
 
 import java.util.List;
 
-import com.devjr.ca.viso.entity.PersonEntity;
+import com.devjr.ca.viso.domain.Person;
 
-public interface IPersonService {
+public interface IPersonService{
 
-	List<PersonEntity> findAll();
+    List<Person> findAll();
 
-	PersonEntity findById(Integer id);
+    Person findById(Integer id);
 
-	void save(PersonEntity value);
+    Person save(Person value);
 
-	void deleteById(Integer id);
+    void deleteById(Integer id);
 
 }

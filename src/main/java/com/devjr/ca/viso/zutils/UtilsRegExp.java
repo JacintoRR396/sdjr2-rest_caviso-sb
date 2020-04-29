@@ -2,12 +2,17 @@ package com.devjr.ca.viso.zutils;
 
 public class UtilsRegExp {
 
+	// *** COMMON ***
+	public static final String INDEX_REGEX = "^(\\d{1,8})";
+
 	// *** PERSON ***
 	public static final String DNI_REGEX = "^(\\d{8})([A-Z])$";
 	public static final String NIE_REGEX = "^[XYZ]\\d{7,8}[A-Z]$";
 	public static final String CIF_REGEX = "^([ABCDEFGHJKLMNPQRSUVW])(\\d{7})([0-9A-J])$";
+	public static final String DOC_NUMBER_REGEX = "^((\\\\d{8})([A-Z])|[XYZ]\\\\d{7,8}[A-Z]|([ABCDEFGHJKLMNPQRSUVW])(\\d{7})([0-9A-J]))$";
 	public static final String NAME_REGEX = "^[A-Z]{1}[a-zñA-Záéíóú\\s\\.]{2,99}";
 	public static final String DATE_REGEX = "^(0?[1-9]|[12][0-9]|3[01])\\/(0?[1-9]|1[012])\\/\\d{2,4}$";
+	public static final String BALANCE_REGEX = "^[0-9]{1,5}[\\.|,]?[0-9]{0,2}$";
 	public static final String PATH_IMAGE_REGEX = "^[a-zA-Z0-9\\.\\/\\_\\-]{3,245}(.jpg|.jpeg|.png|.gif)$";
 	public static final String DESCRIPTION_REGEX = "^[A-Z]{1}[a-zA-Záéíóú\\s\\.\\_\\-,;()¿?!¡=]{3,5000}";
 
@@ -37,7 +42,6 @@ public class UtilsRegExp {
 	public static final String NUM_MEMBER_REGEX = "^[0-9]{1,5}$";
 	public static final String USERNAME_REGEX = "[0-9a-zñA-Záéíóú\\s\\.\\_\\-,!¡$]{3,99}";
 	public static final String PASS_REGEX = "[0-9a-zñA-Záéíóú\\s\\.\\_\\-,!¡$]{3,99}";
-	public static final String BALANCE_REGEX = "^[0-9]{1,5}[\\.|,]?[0-9]{0,2}$";
 	public static final String NUM_RACES_REGEX = "^[0-9]{1,5}$";
 
 	private UtilsRegExp() {

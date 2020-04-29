@@ -4,18 +4,29 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.devjr.ca.viso.entity.ContactEntity;
 
-public interface IContactRepo extends JpaRepository<ContactEntity, Integer> {
+/**
+ * Representa el Repositorio JPA respecto a los Medios de Contacto de una
+ * Persona Física/Jurídica o Carrera.
+ *
+ * @author Jacinto R^2
+ * @version 1.0
+ * @since 18/04/2020
+ * @modify 18/04/2020
+ */
+@Repository
+public interface IContactRepo extends JpaRepository<ContactEntity, Integer>{
 
-	@Query("from ContactEntity ce order by ce.email")
-	// @Query(value = "SELECT * FROM contact ORDER BY email", nativeQuery = true)
-	List<ContactEntity> findAllOrderByEmail();
+    @Query("from ContactEntity ce order by ce.email")
+    // @Query(value = "SELECT * FROM contact ORDER BY email", nativeQuery = true)
+    List<ContactEntity> findAllOrderByEmail();
 
-	@Query("from ContactEntity ce where ce.phoneMobile like %?1%")
-	List<ContactEntity> searchPhoneMovil(String phoneMobile);
+    @Query("from ContactEntity ce where ce.phoneMobile like %?1%")
+    List<ContactEntity> searchPhoneMovil(String phoneMobile);
 
-	List<ContactEntity> findByPhoneHomeContainingOrderByEmailAsc(String phoneHome);
+    List<ContactEntity> findByPhoneHomeContainingOrderByEmailAsc(String phoneHome);
 
 }
