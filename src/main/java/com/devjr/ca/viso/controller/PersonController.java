@@ -36,79 +36,73 @@ import com.devjr.ca.viso.service.IPersonService;
 @RestController
 @RequestMapping(path = "/persons", produces = MediaType.APPLICATION_JSON)
 @CrossOrigin(origins = "*")
-public class PersonController{
+public class PersonController {
 
-    @Autowired
-    private IPersonService service;
+	@Autowired
+	private IPersonService service;
 
-    /*********** GET ***********/
-    @GetMapping()
-    public ResponseEntity<List<Person>> getAll(){
-        return ResponseEntity.ok().body(this.service.findAll());
-    }
+	/*********** GET ***********/
+	@GetMapping()
+	public ResponseEntity<List<Person>> getAll() {
+		return ResponseEntity.ok().body(this.service.findAll());
+	}
 
-    /*********** PSOT ***********/
-    @PostMapping(consumes = MediaType.APPLICATION_JSON)
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Person> insert(@RequestBody
-    final Person value){
-        return ResponseEntity.ok().body(this.service.save(value));
-    }
+	/*********** POST ***********/
+	@PostMapping(consumes = MediaType.APPLICATION_JSON)
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Person> insert(@RequestBody final Person value) {
+		return ResponseEntity.ok().body(this.service.save(value));
+	}
 
-    /*********** PUT ***********/
-    @PutMapping(consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<Person> updateAll(@Valid
-    @RequestBody
-    final Person value){
-        return ResponseEntity.ok().body(this.service.save(value));
-    }
+	/*********** PUT ***********/
+	@PutMapping(consumes = MediaType.APPLICATION_JSON)
+	public ResponseEntity<Person> updateAll(@Valid @RequestBody final Person value) {
+		return ResponseEntity.ok().body(this.service.save(value));
+	}
 
-    /*********** PATCH ***********/
-    @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<Person> update(@PathVariable("id")
-    final Integer id, @RequestBody
-    final Person value){
-        final Person entityDAO = this.service.findById(id);
-        final Person.Builder entity = Person.valueOf(entityDAO).builder();
-        if(entity != null){
-            if(value.getDocumentType().equals(EPersonDocument.EMPTY)){
-                entity.withDocumentType(value.getDocumentType());
-            }
-            if(!StringUtils.isEmpty(value.getDocumentNumber())){
-                entity.withDocumentNumber(value.getDocumentNumber());
-            }
-            if(!StringUtils.isEmpty(value.getName())){
-                entity.withName(value.getName());
-            }
-            if(!StringUtils.isEmpty(value.getSurname())){
-                entity.withSurname(value.getSurname());
-            }
-            if(value.getBirthdate() != null){
-                entity.withBirthdate(value.getBirthdate());
-            }
-            if(value.getBalance() != null){
-                entity.withBalance(value.getBalance());
-            }
-            if(!StringUtils.isEmpty(value.getPathImage())){
-                entity.withPathImage(value.getPathImage());
-            }
-            if(!StringUtils.isEmpty(value.getDescription())){
-                entity.withDescription(value.getDescription());
-            }
-            if(value.getContact() != null){
-                entity.withContact(value.getContact());
-            }
-            return new ResponseEntity<>(this.service.save(entity.build()), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
+	/*********** PATCH ***********/
+	@PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON)
+	public ResponseEntity<Person> update(@PathVariable("id") final Integer id, @RequestBody final Person value) {
+		final Person entityDAO = this.service.findById(id);
+		final Person.Builder entity = Person.valueOf(entityDAO).builder();
+		if (entity != null) {
+			if (value.getDocumentType().equals(EPersonDocument.EMPTY)) {
+				entity.withDocumentType(value.getDocumentType());
+			}
+			if (!StringUtils.isEmpty(value.getDocumentNumber())) {
+				entity.withDocumentNumber(value.getDocumentNumber());
+			}
+			if (!StringUtils.isEmpty(value.getName())) {
+				entity.withName(value.getName());
+			}
+			if (!StringUtils.isEmpty(value.getSurname())) {
+				entity.withSurname(value.getSurname());
+			}
+			if (value.getBirthdate() != null) {
+				entity.withBirthdate(value.getBirthdate());
+			}
+			if (value.getBalance() != null) {
+				entity.withBalance(value.getBalance());
+			}
+			if (!StringUtils.isEmpty(value.getPathImage())) {
+				entity.withPathImage(value.getPathImage());
+			}
+			if (!StringUtils.isEmpty(value.getDescription())) {
+				entity.withDescription(value.getDescription());
+			}
+			if (value.getContact() != null) {
+				entity.withContact(value.getContact());
+			}
+			return new ResponseEntity<>(this.service.save(entity.build()), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
 
-    /*********** DELETE ***********/
-    @DeleteMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id")
-    final Integer id){
-        this.service.deleteById(id);
-    }
+	/*********** DELETE ***********/
+	@DeleteMapping(value = "/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable("id") final Integer id) {
+		this.service.deleteById(id);
+	}
 
 }

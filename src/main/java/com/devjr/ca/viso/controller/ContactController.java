@@ -36,88 +36,79 @@ import com.devjr.ca.viso.service.IContactService;
 @RestController
 @RequestMapping(path = "/contacts", produces = MediaType.APPLICATION_JSON)
 @CrossOrigin(origins = "*")
-public class ContactController{
+public class ContactController {
 
-    @Autowired
-    private IContactService service;
+	@Autowired
+	private IContactService service;
 
-    /*********** GET ***********/
-    @GetMapping()
-    public ResponseEntity<List<Contact>> getAll(){
-        return ResponseEntity.ok().body(this.service.findAll());
-    }
+	/*********** GET ***********/
+	@GetMapping()
+	public ResponseEntity<List<Contact>> getAll() {
+		return ResponseEntity.ok().body(this.service.findAll());
+	}
 
-    @GetMapping("/orderByEmail")
-    public ResponseEntity<List<Contact>> getAllOrderByEmail(){
-        return ResponseEntity.ok().body(this.service.findAllOrderByEmail());
-    }
+	@GetMapping("/orderByEmail")
+	public ResponseEntity<List<Contact>> getAllOrderByEmail() {
+		return ResponseEntity.ok().body(this.service.findAllOrderByEmail());
+	}
 
-    @GetMapping("/searchByPhoneMobile/{phoneMobile}")
-    public ResponseEntity<List<Contact>> getAllByPhoneMovil(@PathVariable("phoneMobile")
-    final String phoneMobile){
-        return ResponseEntity.ok().body(this.service.searchByPhoneMobile(phoneMobile));
-    }
+	@GetMapping("/searchByPhoneMobile/{phoneMobile}")
+	public ResponseEntity<List<Contact>> getAllByPhoneMovil(@PathVariable("phoneMobile") final String phoneMobile) {
+		return ResponseEntity.ok().body(this.service.searchByPhoneMobile(phoneMobile));
+	}
 
-    @GetMapping("/searchByPhoneHome/{phoneHome}")
-    public ResponseEntity<List<Contact>> getAllByPhoneHome(@PathVariable("phoneHome")
-    final String phoneHome){
-        return ResponseEntity.ok().body(this.service.searchByPhoneHome(phoneHome));
-    }
+	@GetMapping("/searchByPhoneHome/{phoneHome}")
+	public ResponseEntity<List<Contact>> getAllByPhoneHome(@PathVariable("phoneHome") final String phoneHome) {
+		return ResponseEntity.ok().body(this.service.searchByPhoneHome(phoneHome));
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Contact> get(@PathVariable("id")
-    final Integer id){
-        final Contact entity = this.service.findById(id);
-        if(entity != null)
-            return new ResponseEntity<>(entity, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<Contact> get(@PathVariable("id") final Integer id) {
+		final Contact entity = this.service.findById(id);
+		if (entity != null)
+			return new ResponseEntity<>(entity, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
 
-    /*********** PSOT ***********/
-    @PostMapping(consumes = MediaType.APPLICATION_JSON)
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Contact> insert(@RequestBody
-    final Contact value){
-        return ResponseEntity.ok().body(this.service.save(value));
-    }
+	/*********** POST ***********/
+	@PostMapping(consumes = MediaType.APPLICATION_JSON)
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Contact> insert(@RequestBody final Contact value) {
+		return ResponseEntity.ok().body(this.service.save(value));
+	}
 
-    /*********** PUT ***********/
-    @PutMapping(consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<Contact> updateAll(@Valid
-    @RequestBody
-    final Contact value){
-        return ResponseEntity.ok().body(this.service.save(value));
-    }
+	/*********** PUT ***********/
+	@PutMapping(consumes = MediaType.APPLICATION_JSON)
+	public ResponseEntity<Contact> updateAll(@Valid @RequestBody final Contact value) {
+		return ResponseEntity.ok().body(this.service.save(value));
+	}
 
-    /*********** PATCH ***********/
-    @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<Contact> update(@PathVariable("id")
-    final Integer id, @RequestBody
-    final Contact value){
-        final Contact entityDAO = this.service.findById(id);
-        final Contact.Builder entity = Contact.valueOf(entityDAO).builder();
-        if(entity != null){
-            if(!StringUtils.isEmpty(value.getEmail())){
-                entity.withEmail(value.getEmail());
-            }
-            if(!StringUtils.isEmpty(value.getPhoneMobile())){
-                entity.withPhoneMobile(value.getPhoneMobile());
-            }
-            if(!StringUtils.isEmpty(value.getPhoneHome())){
-                entity.withPhoneHome(value.getPhoneHome());
-            }
-            return new ResponseEntity<>(this.service.save(entity.build()), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
+	/*********** PATCH ***********/
+	@PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON)
+	public ResponseEntity<Contact> update(@PathVariable("id") final Integer id, @RequestBody final Contact value) {
+		final Contact entityDAO = this.service.findById(id);
+		final Contact.Builder entity = Contact.valueOf(entityDAO).builder();
+		if (entity != null) {
+			if (!StringUtils.isEmpty(value.getEmail())) {
+				entity.withEmail(value.getEmail());
+			}
+			if (!StringUtils.isEmpty(value.getPhoneMobile())) {
+				entity.withPhoneMobile(value.getPhoneMobile());
+			}
+			if (!StringUtils.isEmpty(value.getPhoneHome())) {
+				entity.withPhoneHome(value.getPhoneHome());
+			}
+			return new ResponseEntity<>(this.service.save(entity.build()), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
 
-    /*********** DELETE ***********/
-    @DeleteMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id")
-    final Integer id){
-        this.service.deleteById(id);
-    }
+	/*********** DELETE ***********/
+	@DeleteMapping(value = "/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable("id") final Integer id) {
+		this.service.deleteById(id);
+	}
 
 }
