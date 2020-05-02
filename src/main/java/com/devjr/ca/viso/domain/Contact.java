@@ -45,7 +45,7 @@ public class Contact implements Comparable<Contact> {
 		this(builder.id, builder.email, builder.phoneMobile, builder.phoneHome);
 	}
 
-	/* GETTERS AND SETTERS */
+	/* GETTERS */
 	public Integer getId() {
 		return this.id;
 	}
@@ -76,10 +76,12 @@ public class Contact implements Comparable<Contact> {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!(obj instanceof Contact))
+		}
+		if (!(obj instanceof Contact)) {
 			return false;
+		}
 		final Contact other = (Contact) obj;
 		return this.id.equals(other.id) && this.email.equals(other.email) && this.phoneMobile.equals(other.phoneMobile)
 				&& this.phoneHome.equals(other.phoneHome);
@@ -110,10 +112,14 @@ public class Contact implements Comparable<Contact> {
 		return new Contact(obj.getId(), obj.getEmail(), obj.getPhoneMobile(), obj.getPhoneHome());
 	}
 
-	public static final Comparator<Contact> phoneMobileComparatorASC = (final Contact obj1, final Contact obj2) -> obj1
-			.getPhoneMobile().toUpperCase().compareTo(obj2.getPhoneHome().toUpperCase());
-	public static final Comparator<Contact> phoneMobileComparatorDESC = (final Contact obj1, final Contact obj2) -> obj2
-			.getPhoneMobile().toUpperCase().compareTo(obj1.getPhoneHome().toUpperCase());
+	public static final Comparator<Contact> comparatorEmailASC = (final Contact obj1, final Contact obj2) -> obj1
+			.getEmail().toUpperCase().compareTo(obj2.getEmail().toUpperCase());
+	public static final Comparator<Contact> comparatorEmailDESC = (final Contact obj1, final Contact obj2) -> obj2
+			.getEmail().toUpperCase().compareTo(obj1.getEmail().toUpperCase());
+	public static final Comparator<Contact> comparatorPhoneMobileASC = (final Contact obj1, final Contact obj2) -> obj1
+			.getPhoneMobile().toUpperCase().compareTo(obj2.getPhoneMobile().toUpperCase());
+	public static final Comparator<Contact> comparatorPhoneMobileDESC = (final Contact obj1, final Contact obj2) -> obj2
+			.getPhoneMobile().toUpperCase().compareTo(obj1.getPhoneMobile().toUpperCase());
 
 	/* INTERNAL CLASS */
 	public static class Builder {

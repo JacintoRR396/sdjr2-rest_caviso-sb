@@ -32,7 +32,7 @@ public class ContactRequestConverter implements Converter<Contact, ContactEntity
 			entity.setPhoneMobile(source.getPhoneMobile());
 			entity.setPhoneHome(source.getPhoneHome());
 			return entity;
-		} catch (final IllegalArgumentException e) {
+		} catch (final IllegalArgumentException | NullPointerException e) {
 			ContactRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
 			return null;
 		}
