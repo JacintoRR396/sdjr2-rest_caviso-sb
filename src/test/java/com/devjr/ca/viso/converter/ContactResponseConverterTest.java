@@ -39,8 +39,9 @@ public class ContactResponseConverterTest {
 
 	@Test
 	public void testConvertWithException() throws Exception {
-		final Contact obj = new ContactResponseConverter().convert(null);
-		Assertions.assertNull(obj);
+		Assertions.assertThrows(NullPointerException.class, () -> {
+			new ContactResponseConverter().convert(null);
+		});
 	}
 
 }

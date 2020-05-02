@@ -179,6 +179,15 @@ public class ContactTest {
 		Assertions.assertTrue(Boolean.TRUE);
 	}
 
+	@Test
+	@Tag(value = "MethodsInstance")
+	public void testJsonAdapter() {
+		final String json = Contact.toJsonStr(this.obj);
+		final Contact obj = Contact.toObjWebResponse(json);
+		ContactTest.LOG.info("testJsonAdapter : \n" + obj);
+		Assertions.assertTrue(Boolean.TRUE);
+	}
+
 	/* METHODS OF CLASSES */
 	@Test
 	@Tag(value = "MethodsClasses")

@@ -38,8 +38,9 @@ public class ContactRequestConverterTest {
 
 	@Test
 	public void testConvertWithException() throws Exception {
-		final ContactEntity objEntity = new ContactRequestConverter().convert(null);
-		Assertions.assertNull(objEntity);
+		Assertions.assertThrows(NullPointerException.class, () -> {
+			new ContactRequestConverter().convert(null);
+		});
 	}
 
 }

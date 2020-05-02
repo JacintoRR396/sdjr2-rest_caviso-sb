@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javax.validation.constraints.Pattern;
 
+import com.devjr.ca.viso.zutils.JsonAdapter;
 import com.devjr.ca.viso.zutils.UtilsRegExp;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -105,6 +106,14 @@ public class Contact implements Comparable<Contact> {
 
 	public Builder builder() {
 		return new Builder(this);
+	}
+
+	public static Contact toObjWebResponse(final String jsonData) {
+		return JsonAdapter.readValue(jsonData, Contact.class);
+	}
+
+	public static String toJsonStr(final Contact objWebResp) {
+		return JsonAdapter.writeValueAsString(objWebResp);
 	}
 
 	/* METHODS OF CLASSES */

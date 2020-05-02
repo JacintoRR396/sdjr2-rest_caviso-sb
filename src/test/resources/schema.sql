@@ -6,9 +6,9 @@ DROP TABLE IF EXISTS `contact`;
 
 CREATE TABLE `contact` (
   `id_contact` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `phone_mobile` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `phone_home` varchar(12) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone_mobile` varchar(15) DEFAULT NULL,
+  `phone_home` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id_contact`),
   UNIQUE KEY `id_contact_UNIQUE` (`id_contact`),
   UNIQUE KEY `email_UNIQUE` (`email`),
