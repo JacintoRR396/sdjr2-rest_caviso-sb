@@ -2,7 +2,10 @@ package com.devjr.ca.viso.domain;
 
 import java.util.Comparator;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.devjr.ca.viso.zutils.JsonAdapter;
 import com.devjr.ca.viso.zutils.UtilsRegExp;
@@ -22,12 +25,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Contact implements Comparable<Contact> {
 
 	/* VARIABLES */
-	@Pattern(regexp = UtilsRegExp.INDEX_REGEX)
+	@NotNull
+	@Range(min = 1, max = 8)
 	private final Integer id;
+
+	@NotNull
 	@Pattern(regexp = UtilsRegExp.EMAIL_REGEX)
 	private final String email;
+
 	@Pattern(regexp = UtilsRegExp.PHONE_MOBILE_REGEX)
 	private final String phoneMobile;
+
 	@Pattern(regexp = UtilsRegExp.PHONE_HOME_REGEX)
 	private final String phoneHome;
 
@@ -125,6 +133,7 @@ public class Contact implements Comparable<Contact> {
 			.getEmail().toUpperCase().compareTo(obj2.getEmail().toUpperCase());
 	public static final Comparator<Contact> comparatorEmailDESC = (final Contact obj1, final Contact obj2) -> obj2
 			.getEmail().toUpperCase().compareTo(obj1.getEmail().toUpperCase());
+
 	public static final Comparator<Contact> comparatorPhoneMobileASC = (final Contact obj1, final Contact obj2) -> obj1
 			.getPhoneMobile().toUpperCase().compareTo(obj2.getPhoneMobile().toUpperCase());
 	public static final Comparator<Contact> comparatorPhoneMobileDESC = (final Contact obj1, final Contact obj2) -> obj2
