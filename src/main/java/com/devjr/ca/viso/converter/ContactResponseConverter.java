@@ -27,9 +27,12 @@ public class ContactResponseConverter implements Converter<ContactEntity, Contac
 	public Contact convert(final ContactEntity source) {
 		try {
 			return new Contact(source.getId(), source.getEmail(), source.getPhoneMobile(), source.getPhoneHome());
+		} catch (final NullPointerException e) {
+			ContactResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
+			throw new NullPointerException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
 		} catch (final IllegalArgumentException e) {
 			ContactResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
-			return null;
+			throw new IllegalArgumentException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
 		}
 	}
 

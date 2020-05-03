@@ -3,7 +3,7 @@ package com.devjr.ca.viso.zutils;
 public class UtilsRegExp {
 
 	// *** COMMON ***
-	public static final String INDEX_REGEX = "^(\\d{1,8})";
+	public static final String INDEX_REGEX = "^(\\d{1,8})$";
 
 	// *** PERSON ***
 	public static final String DNI_REGEX = "^(\\d{8})([A-Z])$";
@@ -26,7 +26,7 @@ public class UtilsRegExp {
 	public static final String ADDITIONAL_INFO_REGEX = "^[A-Z]{1}[a-zA-Záéíóú\\s\\.\\_\\-,;()¿?!¡=]{3,2500}";
 
 	// *** CONCTACT ***
-	public static final String EMAIL_REGEX = "[_A-Za-z0-9-]+(?:.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(?:.[A-Za-z0-9]+)*(?:.[A-Za-z]{2,})";
+	public static final String EMAIL_REGEX = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 	public static final String PHONE_MOBILE_REGEX = "^(\\+34|0034|34)?[\\s|\\-|\\.]?[6|7|9][\\s|\\-|\\.]?([0-9][\\s|\\-|\\.]?){8}$";
 	public static final String PHONE_HOME_REGEX = "^[9][0-9]{1}[\\s|\\-|\\.]?([0-9][\\s|\\-|\\.]?){7}$";
 
