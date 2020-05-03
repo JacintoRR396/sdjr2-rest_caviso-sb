@@ -61,16 +61,19 @@ public class ContactTest {
 	@DisplayName(value = "Regular Expression about ID")
 	public void testIdRegExp() {
 		String valueRegExp = String.valueOf(UtilsTesting.ID);
-		Assertions.assertTrue(UtilsTesting.matcherFind(UtilsRegExp.INDEX_REGEX, valueRegExp));
+		Assertions.assertTrue(UtilsTesting.matcherMatches(UtilsRegExp.INDEX_REGEX, valueRegExp));
+		// with 1 character
+		valueRegExp = "1";
+		Assertions.assertTrue(UtilsTesting.matcherMatches(UtilsRegExp.INDEX_REGEX, valueRegExp));
 		// less than 1 character
 		valueRegExp = "";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.INDEX_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.INDEX_REGEX, valueRegExp));
 		// more than 8 characters
 		valueRegExp = "123456789";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.INDEX_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.INDEX_REGEX, valueRegExp));
 		// with a consonant
 		valueRegExp = "235j";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.INDEX_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.INDEX_REGEX, valueRegExp));
 	}
 
 	@Test
@@ -78,16 +81,16 @@ public class ContactTest {
 	@DisplayName(value = "Regular Expression about Email")
 	public void testEmailRegExp() {
 		String valueRegExp = UtilsTesting.EMAIL;
-		Assertions.assertTrue(UtilsTesting.matcherFind(UtilsRegExp.EMAIL_REGEX, valueRegExp));
+		Assertions.assertTrue(UtilsTesting.matcherMatches(UtilsRegExp.EMAIL_REGEX, valueRegExp));
 		// without extension
 		valueRegExp = "algo@domain";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.EMAIL_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.EMAIL_REGEX, valueRegExp));
 		// without domain
 		valueRegExp = "algo.ext";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.EMAIL_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.EMAIL_REGEX, valueRegExp));
 		// with characters not allowed
 		valueRegExp = "algoña@domain.ext";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.EMAIL_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.EMAIL_REGEX, valueRegExp));
 	}
 
 	@Test
@@ -95,20 +98,20 @@ public class ContactTest {
 	@DisplayName(value = "Regular Expression about Phone Mobile")
 	public void testPhoneMobileRegExp() {
 		String valueRegExp = UtilsTesting.PHONE_MOBILE;
-		Assertions.assertTrue(UtilsTesting.matcherFind(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
-		Assertions.assertTrue(UtilsTesting.matcherFind(UtilsRegExp.PHONE_MOBILE_REGEX, "+34" + valueRegExp));
+		Assertions.assertTrue(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
+		Assertions.assertTrue(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_MOBILE_REGEX, "+34" + valueRegExp));
 		// do not start with 6, 7 or 9
 		valueRegExp = "555333111";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
 		// with 8 digits
 		valueRegExp = "66633311";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
 		// with 10 digits
 		valueRegExp = "6663331119";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
 		// don't start with +34
 		valueRegExp = "+35666999333";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_MOBILE_REGEX, valueRegExp));
 	}
 
 	@Test
@@ -116,16 +119,16 @@ public class ContactTest {
 	@DisplayName(value = "Regular Expression about Phone Home")
 	public void testPhoneHomeRegExp() {
 		String valueRegExp = UtilsTesting.PHONE_HOME;
-		Assertions.assertTrue(UtilsTesting.matcherFind(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
+		Assertions.assertTrue(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
 		// do not start with 9
 		valueRegExp = "855278768";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
 		// with 8 digits
 		valueRegExp = "95527876";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
 		// with 10 digits
 		valueRegExp = "9552787680";
-		Assertions.assertFalse(UtilsTesting.matcherFind(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
+		Assertions.assertFalse(UtilsTesting.matcherMatches(UtilsRegExp.PHONE_HOME_REGEX, valueRegExp));
 	}
 
 	/* METHODS OF INSTANCE */
