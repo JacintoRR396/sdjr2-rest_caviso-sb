@@ -9,7 +9,7 @@ import com.devjr.ca.viso.domain.Contact;
 import com.devjr.ca.viso.entity.ContactEntity;
 
 /**
- * Testea al Convertidor entre el Dominio y el DAO respectp a los Medios de
+ * Testea al Convertidor entre el Dominio y el DAO respecto a los Medios de
  * Contacto de una Persona Física/Jurídica o Carrera.
  *
  * @author Jacinto R^2

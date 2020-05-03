@@ -3,7 +3,8 @@ package com.devjr.ca.viso.zutils;
 public class UtilsRegExp {
 
 	// *** COMMON ***
-	public static final String INDEX_REGEX = "^(\\d{1,8})$";
+	public static final String INDEX_REGEX = "^(\\d{1,8})";
+	public static final String NAME_GENERIC_REGEX = "^[A-Z]{1}[a-zñA-Záéíóú\\s/]{2,99}";
 
 	// *** PERSON ***
 	public static final String DNI_REGEX = "^(\\d{8})([A-Z])$";
@@ -17,11 +18,11 @@ public class UtilsRegExp {
 	public static final String DESCRIPTION_REGEX = "^[A-Z]{1}[a-zA-Záéíóú\\s\\.\\_\\-,;()¿?!¡=]{3,5000}";
 
 	// *** ADDRESS ***
-	public static final String STREET_REGEX = "^[A-Z]{1}[a-zñA-Záéíóú\\s/]{2,149}";
+	public static final String STREET_REGEX = UtilsRegExp.NAME_GENERIC_REGEX;
 	public static final String NUMBER_REGEX = "^[0-9]{1,5}[A-Z]?$";
-	public static final String TOWN_REGEX = "^[A-Z]{1}[a-zñA-Záéíóú\\s/]{2,99}";
-	public static final String CITY_REGEX = "^[A-Z]{1}[a-zñA-Záéíóú\\s/]{2,99}";
-	public static final String COUNTRY_REGEX = "^[A-Z]{1}[a-zñA-Záéíóú\\s/]{2,99}";
+	public static final String TOWN_REGEX = UtilsRegExp.NAME_GENERIC_REGEX;
+	public static final String CITY_REGEX = UtilsRegExp.NAME_GENERIC_REGEX;
+	public static final String COUNTRY_REGEX = UtilsRegExp.NAME_GENERIC_REGEX;
 	public static final String POSTAL_CODE_REGEX = "^(5[0-2]|[0-4][0-9])[0-9]{3}$";
 	public static final String ADDITIONAL_INFO_REGEX = "^[A-Z]{1}[a-zA-Záéíóú\\s\\.\\_\\-,;()¿?!¡=]{3,2500}";
 

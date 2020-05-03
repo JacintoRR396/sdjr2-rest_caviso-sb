@@ -40,6 +40,7 @@ public class ContactServiceImpl implements IContactService {
 	@Autowired
 	private ContactResponseConverter converterResponse;
 
+	/*********** GET ***********/
 	@Override
 	public List<Contact> findAll() {
 		final List<ContactEntity> listDAO = this.repo.findAll();
@@ -87,18 +88,21 @@ public class ContactServiceImpl implements IContactService {
 	@Override
 	public Contact findById(final Integer id) {
 		final Optional<ContactEntity> opt = this.repo.findById(id);
-		if (opt.isPresent())
+		if (opt.isPresent()) {
 			return this.converterResponse.convert(opt.get());
+		}
 		ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_GET_ONE_BBDD);
 		return null;
 	}
 
+	/*********** POST - PUT - PATCH ***********/
 	@Override
 	public Contact save(final Contact value) {
 		final ContactEntity entity = this.converterRequest.convert(value);
 		return this.converterResponse.convert(this.repo.save(entity));
 	}
 
+	/*********** DELETE ***********/
 	@Override
 	public void deleteById(final Integer id) {
 		try {
