@@ -65,10 +65,11 @@ public class ContactController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Contact> get(@PathVariable("id") final Integer id) {
 		final Contact entity = this.service.findById(id);
-		if (entity != null)
+		if (entity != null) {
 			return new ResponseEntity<>(entity, HttpStatus.OK);
-		else
+		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
 	}
 
 	/*********** POST ***********/

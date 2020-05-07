@@ -66,7 +66,9 @@ public class AddressServiceImpl implements IAddressService {
 	@Override
 	public Address save(final Address value) {
 		final AddressEntity entity = this.converterRequest.convert(value);
-		return this.converterResponse.convert(this.repo.save(entity));
+		final Address res = this.converterResponse.convert(this.repo.save(entity));
+		AddressServiceImpl.LOG.info(UtilsLanguage.MSG_OK_ADD_UPDATE_BBDD);
+		return res;
 	}
 
 	/*********** DELETE ***********/
@@ -74,6 +76,7 @@ public class AddressServiceImpl implements IAddressService {
 	public void deleteById(final Integer id) {
 		try {
 			this.repo.deleteById(id);
+			AddressServiceImpl.LOG.info(UtilsLanguage.MSG_OK_DELETE_BBDD);
 		} catch (final EmptyResultDataAccessException e) {
 			AddressServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_DELETE_BBDD);
 		}

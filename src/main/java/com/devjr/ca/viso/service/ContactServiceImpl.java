@@ -99,7 +99,9 @@ public class ContactServiceImpl implements IContactService {
 	@Override
 	public Contact save(final Contact value) {
 		final ContactEntity entity = this.converterRequest.convert(value);
-		return this.converterResponse.convert(this.repo.save(entity));
+		final Contact res = this.converterResponse.convert(this.repo.save(entity));
+		ContactServiceImpl.LOG.info(UtilsLanguage.MSG_OK_ADD_UPDATE_BBDD);
+		return res;
 	}
 
 	/*********** DELETE ***********/
@@ -107,6 +109,7 @@ public class ContactServiceImpl implements IContactService {
 	public void deleteById(final Integer id) {
 		try {
 			this.repo.deleteById(id);
+			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_OK_DELETE_BBDD);
 		} catch (final EmptyResultDataAccessException e) {
 			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_DELETE_BBDD);
 		}
