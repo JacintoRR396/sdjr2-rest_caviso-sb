@@ -1,5 +1,6 @@
 package com.devjr.ca.viso.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import com.devjr.ca.viso.domain.Contact;
 import com.devjr.ca.viso.entity.ContactEntity;
 import com.devjr.ca.viso.repository.IContactRepo;
 import com.devjr.ca.viso.zutils.UtilsLanguage;
+import com.devjr.ca.viso.zutils.UtilsLogs;
 
 /**
  * Representa el Servicio respecto a los Medios de Contacto de una Persona
@@ -24,7 +26,7 @@ import com.devjr.ca.viso.zutils.UtilsLanguage;
  * @author Jacinto R^2
  * @version 1.0
  * @since 18/04/2020
- * @modify 18/04/2020
+ * @modify 10/05/2020
  */
 @Service
 public class ContactServiceImpl implements IContactService {
@@ -43,13 +45,23 @@ public class ContactServiceImpl implements IContactService {
 	/*********** GET ***********/
 	@Override
 	public List<Contact> findAll() {
-		final List<ContactEntity> listDAO = this.repo.findAll();
-		final List<Contact> list = listDAO.stream().map(ce -> this.converterResponse.convert(ce))
-				.collect(Collectors.toList());
-		if (list.isEmpty()) {
-			ContactServiceImpl.LOG.info(UtilsLanguage.MSG_ERROR_GET_ALL_BBDD);
+		try {
+			final List<ContactEntity> listDAO = this.repo.findAll();
+			final List<Contact> list = listDAO.stream().map(ce -> this.converterResponse.convert(ce))
+					.collect(Collectors.toList());
+			if (list.isEmpty()) {
+				final String msg = UtilsLogs.info(this.getClass().getSimpleName(), "findAll",
+						UtilsLanguage.MSG_INFO_GET_ALL_BBDD);
+				ContactServiceImpl.LOG.info(msg);
+			}
+			return list;
+		} catch (final NullPointerException npe) {
+			final String msg = UtilsLogs.error(this.getClass().getSimpleName(), "findAll",
+					UtilsLanguage.MSG_ERROR_GET_ALL_BBDD);
+			ContactServiceImpl.LOG.error(msg);
+			// TODO throw exception personalized
+			return new ArrayList<>();
 		}
-		return list;
 	}
 
 	@Override

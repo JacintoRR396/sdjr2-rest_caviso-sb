@@ -2,10 +2,9 @@ package com.devjr.ca.viso.domain;
 
 import java.util.Comparator;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.Range;
 
 import com.devjr.ca.viso.zutils.JsonAdapter;
 import com.devjr.ca.viso.zutils.UtilsRegExp;
@@ -19,14 +18,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Jacinto R^2
  * @version 1.0
  * @since 18/04/2020
- * @modify 18/04/2020
+ * @modify 10/05/2020
  */
 //@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Contact implements Comparable<Contact> {
 
 	/* VARIABLES */
 	@NotNull
-	@Range(min = 1, max = 8)
+	@Digits(integer = 6, fraction = 0)
 	private final Integer id;
 
 	@NotNull

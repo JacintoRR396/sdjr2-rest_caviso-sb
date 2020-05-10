@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devjr.ca.viso.domain.EPersonDocument;
-import com.devjr.ca.viso.domain.Person;
-import com.devjr.ca.viso.service.IPersonService;
+import com.devjr.ca.viso.domain.PersonComplete;
+import com.devjr.ca.viso.service.IPersonCompleteService;
 
 /**
- * Representa el Controlador respecto a una Persona Común.
+ * Representa el Controlador respecto a una Persona.
  *
  * @author Jacinto R^2
  * @version 1.0
@@ -34,22 +34,22 @@ import com.devjr.ca.viso.service.IPersonService;
  * @modify 10/05/2020
  */
 @RestController
-@RequestMapping(path = "/persons", produces = MediaType.APPLICATION_JSON)
+@RequestMapping(path = "/personsComplete", produces = MediaType.APPLICATION_JSON)
 @CrossOrigin(origins = "*")
-public class PersonController {
+public class PersonCompleteController {
 
 	@Autowired
-	private IPersonService service;
+	private IPersonCompleteService service;
 
 	/*********** GET ***********/
 	@GetMapping()
-	public ResponseEntity<List<Person>> getAll() {
+	public ResponseEntity<List<PersonComplete>> getAll() {
 		return ResponseEntity.ok().body(this.service.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Person> get(@PathVariable("id") final Integer id) {
-		final Person entity = this.service.findById(id);
+	public ResponseEntity<PersonComplete> get(@PathVariable("id") final Integer id) {
+		final PersonComplete entity = this.service.findById(id);
 		if (entity != null) {
 			return new ResponseEntity<>(entity, HttpStatus.OK);
 		} else {
@@ -60,21 +60,22 @@ public class PersonController {
 	/*********** POST ***********/
 	@PostMapping(consumes = MediaType.APPLICATION_JSON)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Person> insert(@RequestBody final Person value) {
+	public ResponseEntity<PersonComplete> insert(@RequestBody final PersonComplete value) {
 		return ResponseEntity.ok().body(this.service.save(value));
 	}
 
 	/*********** PUT ***********/
 	@PutMapping(consumes = MediaType.APPLICATION_JSON)
-	public ResponseEntity<Person> updateAll(@Valid @RequestBody final Person value) {
+	public ResponseEntity<PersonComplete> updateAll(@Valid @RequestBody final PersonComplete value) {
 		return ResponseEntity.ok().body(this.service.save(value));
 	}
 
 	/*********** PATCH ***********/
 	@PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON)
-	public ResponseEntity<Person> update(@PathVariable("id") final Integer id, @RequestBody final Person value) {
-		final Person entityDAO = this.service.findById(id);
-		final Person.Builder entity = Person.valueOf(entityDAO).builder();
+	public ResponseEntity<PersonComplete> update(@PathVariable("id") final Integer id,
+			@RequestBody final PersonComplete value) {
+		final PersonComplete entityDAO = this.service.findById(id);
+		final PersonComplete.Builder entity = PersonComplete.valueOf(entityDAO).builder();
 		if (entity != null) {
 			if (value.getDocumentType().equals(EPersonDocument.EMPTY)) {
 				entity.withDocumentType(value.getDocumentType());
@@ -99,6 +100,12 @@ public class PersonController {
 			}
 			if (!StringUtils.isEmpty(value.getDescription())) {
 				entity.withDescription(value.getDescription());
+			}
+			if (value.getAddress() != null) {
+				entity.withAddress(value.getAddress());
+			}
+			if (value.getContact() != null) {
+				entity.withContact(value.getContact());
 			}
 			return new ResponseEntity<>(this.service.save(entity.build()), HttpStatus.OK);
 		}

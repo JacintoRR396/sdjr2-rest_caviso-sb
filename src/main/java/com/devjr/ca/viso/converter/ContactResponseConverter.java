@@ -10,7 +10,7 @@ import com.devjr.ca.viso.entity.ContactEntity;
 import com.devjr.ca.viso.zutils.UtilsLanguage;
 
 /**
- * Representa al Convertidor entre el Dominio y el DAO respectp a los Medios de
+ * Representa al Convertidor entre el Dominio y el DAO respecto a los Medios de
  * Contacto de una Persona Física/Jurídica o Carrera.
  *
  * @author Jacinto R^2
