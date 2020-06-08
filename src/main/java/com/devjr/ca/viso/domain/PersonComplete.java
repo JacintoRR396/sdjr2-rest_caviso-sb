@@ -3,19 +3,24 @@ package com.devjr.ca.viso.domain;
 import java.time.LocalDate;
 import java.util.Comparator;
 
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import com.devjr.ca.viso.entity.AddressEntity;
+import com.devjr.ca.viso.entity.ContactEntity;
 import com.devjr.ca.viso.zutils.UtilsDomain;
 import com.devjr.ca.viso.zutils.UtilsRegExp;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Representa el Dominio respecto a una Persona Genérica.
+ * Representa el Dominio respecto a una Persona.
  *
  * @author Jacinto R^2
  * @version 1.0
@@ -23,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @modify 10/05/2020
  */
 //@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Person implements Comparable<Person> {
+public class PersonComplete implements Comparable<PersonComplete> {
 
 	/* VARIABLES */
 	@NotNull
@@ -63,13 +68,26 @@ public class Person implements Comparable<Person> {
 	@Pattern(regexp = UtilsRegExp.DESCRIPTION_REGEX)
 	private final String description;
 
+	@NotNull
+	@Digits(integer = 6, fraction = 0)
+	@OneToOne(targetEntity = AddressEntity.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_address", nullable = false)
+	private final Address address;
+
+	@NotNull
+	@Digits(integer = 6, fraction = 0)
+	@OneToOne(targetEntity = ContactEntity.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_contact", nullable = false)
+	private final Contact contact;
+
 	/* CONSTRUCTORS */
 	@JsonCreator
-	public Person(@JsonProperty("id") final Integer id, @JsonProperty("documentType") final String documentType,
+	public PersonComplete(@JsonProperty("id") final Integer id, @JsonProperty("documentType") final String documentType,
 			@JsonProperty("documentNumber") final String documentNumber, @JsonProperty("name") final String name,
 			@JsonProperty("surname") final String surname, @JsonProperty("birthdate") final String birthdate,
 			@JsonProperty("balance") final Float balance, @JsonProperty("pathImage") final String pathImage,
-			@JsonProperty("description") final String description) {
+			@JsonProperty("description") final String description, @JsonProperty("address") final Address address,
+			@JsonProperty("contact") final Contact contact) {
 		super();
 		this.id = id;
 		this.documentType = EPersonDocument.valueOf(documentType);
@@ -80,11 +98,14 @@ public class Person implements Comparable<Person> {
 		this.balance = balance;
 		this.pathImage = pathImage;
 		this.description = description;
+		this.address = address;
+		this.contact = contact;
 	}
 
-	public Person(final Builder builder) {
+	public PersonComplete(final Builder builder) {
 		this(builder.id, builder.documentType.name(), builder.documentNumber, builder.name, builder.surname,
-				builder.birthdate.toString(), builder.balance, builder.pathImage, builder.description);
+				builder.birthdate.toString(), builder.balance, builder.pathImage, builder.description, builder.address,
+				builder.contact);
 	}
 
 	/* GETTERS AND SETTERS */
@@ -124,6 +145,14 @@ public class Person implements Comparable<Person> {
 		return this.description;
 	}
 
+	public Address getAddress() {
+		return this.address;
+	}
+
+	public Contact getContact() {
+		return this.contact;
+	}
+
 	/* METHODS OF INSTANCE */
 	@Override
 	public int hashCode() {
@@ -138,6 +167,8 @@ public class Person implements Comparable<Person> {
 		result = (prime * result) + ((this.balance == null) ? 0 : this.balance.hashCode());
 		result = (prime * result) + ((this.pathImage == null) ? 0 : this.pathImage.hashCode());
 		result = (prime * result) + ((this.description == null) ? 0 : this.description.hashCode());
+		result = (prime * result) + ((this.address == null) ? 0 : this.address.hashCode());
+		result = (prime * result) + ((this.contact == null) ? 0 : this.contact.hashCode());
 		return result;
 	}
 
@@ -146,15 +177,16 @@ public class Person implements Comparable<Person> {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Person)) {
+		if (!(obj instanceof PersonComplete)) {
 			return false;
 		}
-		final Person other = (Person) obj;
+		final PersonComplete other = (PersonComplete) obj;
 		return this.id.equals(other.id) && this.documentType.equals(other.documentType)
 				&& this.documentNumber.equals(other.documentNumber) && this.name.equals(other.name)
 				&& this.surname.equals(other.surname) && this.birthdate.equals(other.birthdate)
 				&& this.balance.equals(other.balance) && this.pathImage.equals(other.pathImage)
-				&& this.description.equals(other.description);
+				&& this.description.equals(other.description) && this.address.equals(other.address)
+				&& this.contact.equals(other.contact);
 	}
 
 	@Override
@@ -169,11 +201,17 @@ public class Person implements Comparable<Person> {
 		res.append(" - Birhtdate » " + this.birthdate + ".\n");
 		res.append(" - Balance » " + this.balance + ".\n");
 		res.append(" - Description » " + this.description + ".\n");
+		res.append(" - Address » ");
+		res.append((this.address != null) ? this.address.toString() : "null");
+		res.append(".\n");
+		res.append(" - Contact » ");
+		res.append((this.contact != null) ? this.contact.toString() : "null");
+		res.append(".\n");
 		return res.toString();
 	}
 
 	@Override
-	public int compareTo(final Person obj) {
+	public int compareTo(final PersonComplete obj) {
 		return this.getDocumentNumber().compareTo(obj.getDocumentNumber());
 	}
 
@@ -182,17 +220,17 @@ public class Person implements Comparable<Person> {
 	}
 
 	/* METHODS OF CLASSES */
-	public static Person valueOf(final Person obj) {
-		return new Person(obj.getId(), obj.getDocumentType().name(), obj.getDocumentNumber(), obj.getName(),
+	public static PersonComplete valueOf(final PersonComplete obj) {
+		return new PersonComplete(obj.getId(), obj.getDocumentType().name(), obj.getDocumentNumber(), obj.getName(),
 				obj.getSurname(), obj.getBirthdate().toString(), obj.getBalance(), obj.getPathImage(),
-				obj.getDescription());
+				obj.getDescription(), obj.getAddress(), obj.getContact());
 	}
 
-	public static final Comparator<Person> surnameComparatorASC = (final Person obj1, final Person obj2) -> obj1
-			.getSurname().toUpperCase().compareTo(obj2.getSurname().toUpperCase());
+	public static final Comparator<PersonComplete> surnameComparatorASC = (final PersonComplete obj1,
+			final PersonComplete obj2) -> obj1.getSurname().toUpperCase().compareTo(obj2.getSurname().toUpperCase());
 
-	public static final Comparator<Person> balanceComparatorASC = (final Person obj1, final Person obj2) -> obj1
-			.getBalance().compareTo(obj2.getBalance());
+	public static final Comparator<PersonComplete> balanceComparatorASC = (final PersonComplete obj1,
+			final PersonComplete obj2) -> obj1.getBalance().compareTo(obj2.getBalance());
 
 	/* INTERNAL CLASS */
 	public static class Builder {
@@ -206,12 +244,14 @@ public class Person implements Comparable<Person> {
 		private Float balance;
 		private String pathImage;
 		private String description;
+		private Address address;
+		private Contact contact;
 
 		public Builder() {
 			super();
 		}
 
-		public Builder(final Person object) {
+		public Builder(final PersonComplete object) {
 			super();
 			this.id = object.id;
 			this.documentType = object.documentType;
@@ -222,6 +262,8 @@ public class Person implements Comparable<Person> {
 			this.balance = object.balance;
 			this.pathImage = object.pathImage;
 			this.description = object.description;
+			this.address = object.address;
+			this.contact = object.contact;
 		}
 
 		public Builder withId(final Integer id) {
@@ -269,8 +311,18 @@ public class Person implements Comparable<Person> {
 			return this;
 		}
 
-		public Person build() {
-			return new Person(this);
+		public Builder withAddress(final Address address) {
+			this.address = address;
+			return this;
+		}
+
+		public Builder withContact(final Contact contact) {
+			this.contact = contact;
+			return this;
+		}
+
+		public PersonComplete build() {
+			return new PersonComplete(this);
 		}
 
 	}

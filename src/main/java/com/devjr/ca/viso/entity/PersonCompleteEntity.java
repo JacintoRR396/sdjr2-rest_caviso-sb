@@ -2,6 +2,7 @@ package com.devjr.ca.viso.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,12 +10,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.devjr.ca.viso.domain.EPersonDocument;
 
 /**
- * Representa al DAO respecto a una Persona Genérica.
+ * Representa al DAO respecto a una Persona.
  *
  * @author Jacinto R^2
  * @version 1.0
@@ -23,7 +26,7 @@ import com.devjr.ca.viso.domain.EPersonDocument;
  */
 @Entity
 @Table(name = "person", schema = "db_ca_viso")
-public class PersonEntity {
+public class PersonCompleteEntity {
 
 	/* VARIABLES */
 	@Id
@@ -55,6 +58,14 @@ public class PersonEntity {
 
 	@Column(name = "description", nullable = true)
 	private String description;
+
+	@OneToOne(targetEntity = AddressEntity.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_address", nullable = false)
+	private AddressEntity address;
+
+	@OneToOne(targetEntity = ContactEntity.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_contact", nullable = false)
+	private ContactEntity contact;
 
 	/* GETTERS AND SETTERS */
 	public Integer getId() {
@@ -127,6 +138,22 @@ public class PersonEntity {
 
 	public void setDescription(final String description) {
 		this.description = description;
+	}
+
+	public AddressEntity getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(final AddressEntity address) {
+		this.address = address;
+	}
+
+	public ContactEntity getContact() {
+		return this.contact;
+	}
+
+	public void setContact(final ContactEntity contact) {
+		this.contact = contact;
 	}
 
 }

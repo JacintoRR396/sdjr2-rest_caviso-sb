@@ -25,7 +25,7 @@ public class Address implements Comparable<Address> {
 
 	/* VARIABLES */
 	@NotNull
-	@Digits(integer = 8, fraction = 0)
+	@Digits(integer = 6, fraction = 0)
 	private final Integer id;
 
 	@NotNull
