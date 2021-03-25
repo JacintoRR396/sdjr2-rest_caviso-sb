@@ -16,9 +16,14 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	    <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+		<sonar.language>java</sonar.language>
 	</properties>
 
 	<dependencies>
+		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -54,6 +59,42 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+			<!-- MOCKITO -->
+			<dependency>
+			    <groupId>org.mockito</groupId>
+			    <artifactId>mockito-core</artifactId>
+			    <scope>test</scope>
+			</dependency>
+		
+		<!-- APACHE COMMONS -->
+			<!-- LANG 3 -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-lang3</artifactId>
+			</dependency>
+			<!-- CSV -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-csv</artifactId>
+			    <version>1.8</version>
+			</dependency>
+			<!-- EMAIL -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-email</artifactId>
+			    <version>1.5</version>
+			</dependency>
+		<!-- JODA TIME -->
+		<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		</dependency>
+		<!-- JASPER REPORTS - PDF & GRAPHIC -->
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>6.16.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -62,6 +103,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+       		<plugin>
+          		<groupId>org.jacoco</groupId>
+          		<artifactId>jacoco-maven-plugin</artifactId>
+          		<version>0.7.9</version>
+          		<executions>
+          			<execution>
+             			<goals>
+                     		<goal>prepare-agent</goal>
+             			</goals>
+              		</execution>
+         		</executions>
+         		<configuration>
+         			<destFile>${sonar.jacoco.reportPath}</destFile>
+        		</configuration>
+       		</plugin>
 		</plugins>
 	</build>
 
