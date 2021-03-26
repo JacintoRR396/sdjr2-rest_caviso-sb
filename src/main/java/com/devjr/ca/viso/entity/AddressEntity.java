@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Representa al DAO respecto a la Direccion de una Persona Física/Jurídica o
  * Carrera.
@@ -52,6 +54,7 @@ public class AddressEntity {
 		super();
 	}
 
+	@JsonCreator
 	public AddressEntity(final Integer id, final String street, final String number, final String town,
 			final String city, final String country, final Integer postalCode, final String additionalInfo) {
 		super();

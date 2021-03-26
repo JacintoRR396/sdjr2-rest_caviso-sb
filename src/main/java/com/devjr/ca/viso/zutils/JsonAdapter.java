@@ -2,6 +2,7 @@ package com.devjr.ca.viso.zutils;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,7 @@ public class JsonAdapter {
 
 	public static <T> T readValue(final String jsonData, final Class<T> clazz) {
 		try {
-			if ((jsonData != null) && !jsonData.isEmpty()) {
+			if (StringUtils.isNotBlank(jsonData)) {
 				return JsonAdapter.OBJ_MAPPER.readValue(jsonData, clazz);
 			} else {
 				return null;
