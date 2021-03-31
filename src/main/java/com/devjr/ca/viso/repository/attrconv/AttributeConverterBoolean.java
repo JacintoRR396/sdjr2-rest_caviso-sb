@@ -10,30 +10,30 @@ import javax.persistence.Converter;
  * @author Jacinto R^2
  * @version 1.0
  * @since 26/03/2021
- * @modify 26/03/2021
+ * @modify 31/03/2021
  */
 @Converter(autoApply = true)
-public class AttributeConverterBoolean implements AttributeConverter<Boolean, Byte> {
+public class AttributeConverterBoolean implements AttributeConverter<Boolean, Integer> {
 
 	/**
 	 * Convert to database column.
 	 *
 	 * @param attribute the Boolean
-	 * @return the Byte
+	 * @return the Integer
 	 */
 	@Override
-	public Byte convertToDatabaseColumn(final Boolean attribute) {
-		return (byte) ((Boolean.TRUE.equals(attribute)) ? 1 : 0);
+	public Integer convertToDatabaseColumn(final Boolean attribute) {
+		return ((Boolean.TRUE.equals(attribute)) ? 1 : 0);
 	}
 
 	/**
 	 * Convert to entity attribute.
 	 *
-	 * @param dbData the Byte
+	 * @param dbData the Integer
 	 * @return the Boolean
 	 */
 	@Override
-	public Boolean convertToEntityAttribute(final Byte dbData) {
+	public Boolean convertToEntityAttribute(final Integer dbData) {
 		return (dbData == 1) ? Boolean.TRUE : Boolean.FALSE;
 	}
 

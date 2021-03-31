@@ -15,16 +15,16 @@ import org.slf4j.LoggerFactory;
  * @author Jacinto R^2
  * @version 1.0
  * @since 26/03/2021
- * @modify 26/03/2021
+ * @modify 31/03/2021
  */
 class AttributeConverterBooleanTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AttributeConverterBooleanTest.class);
 
 	private static Boolean attributeTrue;
-	private static Byte dbDataOne;
+	private static Integer dbDataOne;
 	private static Boolean attributeFalse;
-	private static Byte dbDataZero;
+	private static Integer dbDataZero;
 	private static AttributeConverterBoolean attrConv = new AttributeConverterBoolean();
 
 	/**
@@ -49,12 +49,12 @@ class AttributeConverterBooleanTest {
 	 */
 	@Test
 	@Tag(value = "Methods Instance")
-	@DisplayName(value = "Converter Boolean to Byte with true")
+	@DisplayName(value = "Converter Boolean to Integer with true")
 	void testConvertToDatabaseColumnTrue() throws Exception {
-		final Byte res = AttributeConverterBooleanTest.attrConv
+		final Integer res = AttributeConverterBooleanTest.attrConv
 				.convertToDatabaseColumn(AttributeConverterBooleanTest.attributeTrue);
-		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Boolean to Byte : " + res);
-		Assertions.assertEquals((byte) 1, res);
+		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Boolean to Integer : " + res);
+		Assertions.assertEquals(1, res);
 	}
 
 	/**
@@ -64,12 +64,12 @@ class AttributeConverterBooleanTest {
 	 */
 	@Test
 	@Tag(value = "Methods Instance")
-	@DisplayName(value = "Converter Boolean to Byte with false")
+	@DisplayName(value = "Converter Boolean to Integer with false")
 	void testConvertToDatabaseColumnFalse() throws Exception {
-		final Byte res = AttributeConverterBooleanTest.attrConv
+		final Integer res = AttributeConverterBooleanTest.attrConv
 				.convertToDatabaseColumn(AttributeConverterBooleanTest.attributeFalse);
-		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Boolean to Byte : " + res);
-		Assertions.assertEquals((byte) 0, res);
+		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Boolean to Integer : " + res);
+		Assertions.assertEquals(0, res);
 	}
 
 	/**
@@ -79,11 +79,11 @@ class AttributeConverterBooleanTest {
 	 */
 	@Test
 	@Tag(value = "Methods Instance")
-	@DisplayName(value = "Converter Byte toBoolean with 1")
+	@DisplayName(value = "Converter Integer toBoolean with 1")
 	void testConvertToEntityAttributeOne() throws Exception {
 		final Boolean res = AttributeConverterBooleanTest.attrConv
 				.convertToEntityAttribute(AttributeConverterBooleanTest.dbDataOne);
-		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Byte to Boolean : " + res);
+		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Integer to Boolean : " + res);
 		Assertions.assertTrue(res);
 	}
 
@@ -94,11 +94,11 @@ class AttributeConverterBooleanTest {
 	 */
 	@Test
 	@Tag(value = "Methods Instance")
-	@DisplayName(value = "Converter Byte toBoolean with 0")
+	@DisplayName(value = "Converter Integer toBoolean with 0")
 	void testConvertToEntityAttributeZero() throws Exception {
 		final Boolean res = AttributeConverterBooleanTest.attrConv
 				.convertToEntityAttribute(AttributeConverterBooleanTest.dbDataZero);
-		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Byte to Boolean : " + res);
+		AttributeConverterBooleanTest.LOG.debug("\n\t[Attribute Converter] Integer to Boolean : " + res);
 		Assertions.assertFalse(res);
 	}
 

@@ -10,7 +10,7 @@ import java.util.Optional;
  * @author Jacinto R^2
  * @version 1.0
  * @since 08/06/2020
- * @modify 23/03/2021
+ * @modify 29/03/2021
  */
 public enum EUserRol {
 
@@ -41,15 +41,8 @@ public enum EUserRol {
 	public static final Comparator<EUserRol> comparatorByCodeDESC = (final EUserRol userRol1,
 			final EUserRol userRol2) -> userRol2.getCode() - userRol1.getCode();
 
-	public static EUserRol converterFromString(final String str) {
-		final Optional<EUserRol> resOpt = Arrays.asList(EUserRol.values()).stream()
-				.filter(euser -> euser.getName().equals(str)).findFirst();
-
-		if (resOpt.isPresent()) {
-			return resOpt.get();
-		} else {
-			return null;
-		}
+	public static Optional<EUserRol> converterFromString(final String str) {
+		return Arrays.asList(EUserRol.values()).stream().filter(euser -> euser.getName().equals(str)).findFirst();
 	}
 
 	public static String converterToString(final EUserRol userlRol) {

@@ -24,6 +24,7 @@ public class UtilsTesting {
 
 	/* USER */
 	public static final String USER_USERNAME = "jroldaro";
+	public static final String USER_USERNAME_AUX = "jroldaroAux";
 	public static final String USER_PASSWORD = "1234";
 	public static final String USER_ALIAS = "balbino";
 	public static final EUserRol USER_ROL = EUserRol.MEMBER;
@@ -31,7 +32,7 @@ public class UtilsTesting {
 	public static final String USER_ROL_MEMBER = "Miembro";
 	public static final String USER_ROL_ADMIN = "Admin";
 	public static final Boolean USER_ACTIVE = Boolean.TRUE;
-	public static final LocalDateTime USER_LAST_ACCESS = LocalDateTime.now();
+	public static final LocalDateTime USER_LAST_ACCESS = LocalDateTime.of(2021, 03, 23, 12, 26, 01);
 
 	/* ADDRESS */
 	public static final String STREET = "Corredera";

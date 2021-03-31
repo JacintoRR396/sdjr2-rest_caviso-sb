@@ -20,7 +20,7 @@ import com.devjr.ca.viso.UtilsTesting;
  * @author Jacinto R^2
  * @version 1.0
  * @since 23/03/2021
- * @modify 24/03/2021
+ * @modify 29/03/2021
  */
 class EUserRolTest {
 
@@ -108,20 +108,9 @@ class EUserRolTest {
 	@DisplayName(value = "Converter from String")
 	void testConverterFromString() throws Exception {
 		for (int i = 0; i < EUserRolTest.userRolNames.length; i++) {
-			Assertions.assertEquals(EUserRol.values()[i], EUserRol.converterFromString(EUserRolTest.userRolNames[i]));
+			Assertions.assertEquals(EUserRol.values()[i],
+					EUserRol.converterFromString(EUserRolTest.userRolNames[i]).get());
 		}
-	}
-
-	/**
-	 * Test converter from string with return null.
-	 *
-	 * @throws Exception the exception
-	 */
-	@Test
-	@Tag(value = "Method Class")
-	@DisplayName(value = "Converter from String with return null")
-	void testConverterFromStringNull() throws Exception {
-		Assertions.assertEquals(null, EUserRol.converterFromString(UtilsTesting.EMAIL));
 	}
 
 	/**

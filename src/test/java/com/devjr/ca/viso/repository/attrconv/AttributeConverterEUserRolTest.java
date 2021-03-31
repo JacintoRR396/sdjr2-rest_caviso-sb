@@ -17,7 +17,7 @@ import com.devjr.ca.viso.service.domain.EUserRol;
  * @author Jacinto R^2
  * @version 1.0
  * @since 26/03/2021
- * @modify 26/03/2021
+ * @modify 29/03/2021
  */
 class AttributeConverterEUserRolTest {
 
@@ -68,6 +68,20 @@ class AttributeConverterEUserRolTest {
 				.convertToEntityAttribute(AttributeConverterEUserRolTest.dbData);
 		AttributeConverterEUserRolTest.LOG.debug("\n\t[Attribute Converter] String to EUserRol : " + res);
 		Assertions.assertEquals(EUserRol.MEMBER, res);
+	}
+
+	/**
+	 * Test convert to entity attribute with null.
+	 *
+	 * @throws Exception the exception
+	 */
+	@Test
+	@Tag(value = "Methods Instance")
+	@DisplayName(value = "Converter String to EUserRol with null")
+	void testConvertToEntityAttributeNull() throws Exception {
+		final EUserRol res = AttributeConverterEUserRolTest.attrConv.convertToEntityAttribute("Defecto");
+		AttributeConverterEUserRolTest.LOG.debug("\n\t[Attribute Converter] String to EUserRol with null: " + res);
+		Assertions.assertNull(res);
 	}
 
 }

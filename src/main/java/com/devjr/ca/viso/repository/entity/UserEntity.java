@@ -49,7 +49,6 @@ public class UserEntity {
 	private String alias;
 
 	@Column(name = "rol", nullable = false, length = 10)
-	// @Enumerated(value = EnumType.STRING)
 	@Convert(converter = AttributeConverterEUserRol.class)
 	private EUserRol rol;
 
