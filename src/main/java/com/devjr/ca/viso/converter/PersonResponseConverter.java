@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.devjr.ca.viso.domain.Person;
 import com.devjr.ca.viso.entity.PersonEntity;
 import com.devjr.ca.viso.zutils.UtilsDomain;
-import com.devjr.ca.viso.zutils.UtilsLanguage;
 
 /**
  * Representa al Convertidor entre el Dominio y el DAO respecto a una Persona
@@ -34,7 +33,7 @@ public class PersonResponseConverter implements Converter<PersonEntity, Person> 
 					source.getSurname(), birthdate, source.getBalance(), source.getPathImage(),
 					source.getDescription());
 		} catch (final IllegalArgumentException e) {
-			PersonResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
+			// PersonResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
 			return null;
 		}
 	}

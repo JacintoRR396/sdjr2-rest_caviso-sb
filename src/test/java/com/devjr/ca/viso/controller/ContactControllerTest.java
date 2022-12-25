@@ -6,6 +6,7 @@ import java.util.List;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -55,41 +56,49 @@ public class ContactControllerTest {
 
 	}
 
+	@Disabled
 	@Test
 	public void testGetAllOrderByEmail() throws Exception {
 		throw new RuntimeException("not yet implemented");
 	}
 
+	@Disabled
 	@Test
 	public void testGetAllByPhoneMovil() throws Exception {
 		throw new RuntimeException("not yet implemented");
 	}
 
+	@Disabled
 	@Test
 	public void testGetAllByPhoneHome() throws Exception {
 		throw new RuntimeException("not yet implemented");
 	}
 
+	@Disabled
 	@Test
 	public void testGet() throws Exception {
 		throw new RuntimeException("not yet implemented");
 	}
 
+	@Disabled
 	@Test
 	public void testInsert() throws Exception {
 		throw new RuntimeException("not yet implemented");
 	}
 
+	@Disabled
 	@Test
 	public void testUpdateAll() throws Exception {
 		throw new RuntimeException("not yet implemented");
 	}
 
+	@Disabled
 	@Test
 	public void testUpdate() throws Exception {
 		throw new RuntimeException("not yet implemented");
 	}
 
+	@Disabled
 	@Test
 	public void testDelete() throws Exception {
 		throw new RuntimeException("not yet implemented");

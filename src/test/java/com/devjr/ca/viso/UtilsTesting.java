@@ -2,6 +2,7 @@ package com.devjr.ca.viso;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +28,7 @@ public class UtilsTesting {
 	public static final String USER_USERNAME_AUX = "jroldaroAux";
 	public static final String USER_PASSWORD = "1234";
 	public static final String USER_ALIAS = "balbino";
+	public static final Optional<String> USER_ALIAS_OPT = Optional.of("balbino");
 	public static final EUserRol USER_ROL = EUserRol.MEMBER;
 	public static final String USER_ROL_USER = "Usuario";
 	public static final String USER_ROL_MEMBER = "Miembro";

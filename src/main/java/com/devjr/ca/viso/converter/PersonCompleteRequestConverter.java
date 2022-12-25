@@ -50,7 +50,7 @@ public class PersonCompleteRequestConverter implements Converter<PersonComplete,
 			entity.setContact(contact);
 			return entity;
 		} catch (final IllegalArgumentException e) {
-			PersonCompleteRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			PersonCompleteRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 			return null;
 		}
 	}

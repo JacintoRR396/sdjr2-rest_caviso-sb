@@ -23,10 +23,8 @@ class UserEntityTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserEntityTest.class);
 
-	private static UserEntity objConstEmpty;
 	private static UserEntity objConst1;
 	private static UserEntity objConst2;
-	private static UserEntity objAux;
 
 	/**
 	 * Sets the up before class.
@@ -37,8 +35,6 @@ class UserEntityTest {
 	protected static void setUpBeforeClass() throws Exception {
 		UserEntityTest.LOG.debug("Startup All : initializing variables");
 
-		UserEntityTest.objConstEmpty = new UserEntity();
-
 		UserEntityTest.objConst1 = new UserEntity(UtilsTesting.ID, UtilsTesting.USER_USERNAME,
 				UtilsTesting.USER_PASSWORD, UtilsTesting.USER_LAST_ACCESS);
 
@@ -46,16 +42,9 @@ class UserEntityTest {
 				UtilsTesting.USER_PASSWORD, UtilsTesting.USER_ALIAS, UtilsTesting.USER_ROL, UtilsTesting.USER_ACTIVE,
 				UtilsTesting.USER_LAST_ACCESS);
 
-		UserEntityTest.objAux = new UserEntity();
-		UserEntityTest.objAux.setId(UserEntityTest.objConst2.getId());
-		UserEntityTest.objAux.setUsername(UserEntityTest.objConst2.getUsername());
-		UserEntityTest.objAux.setPassword(UserEntityTest.objConst2.getPassword());
-		UserEntityTest.objAux.setAlias(UserEntityTest.objConst2.getAlias());
-		UserEntityTest.objAux.setRol(UserEntityTest.objConst2.getRol());
-		UserEntityTest.objAux.setActive(UserEntityTest.objConst2.isActive());
-		UserEntityTest.objAux.setLastAccess(UserEntityTest.objConst2.getLastAccess());
 	}
 
+	/* CONSTRUCTORS */
 	/**
 	 * Test user entity.
 	 *
@@ -64,8 +53,9 @@ class UserEntityTest {
 	@Test
 	@Tag(value = "Constructs")
 	@DisplayName(value = "Construct Empty")
-	void testUserEntity() throws Exception {
-		UserEntityTest.LOG.debug("Construct Empty : \n" + UserEntityTest.objConstEmpty);
+	void testConstructEmpty() throws Exception {
+		final UserEntity user = new UserEntity();
+		UserEntityTest.LOG.info("\n\t[OK] : El Constructor vacio es:" + user);
 		Assertions.assertTrue(Boolean.TRUE);
 	}
 
@@ -76,9 +66,9 @@ class UserEntityTest {
 	 */
 	@Test
 	@Tag(value = "Constructs")
-	@DisplayName(value = "Construct 1")
-	void testUserEntityIntegerStringStringLocalDateTime() throws Exception {
-		UserEntityTest.LOG.debug("Construct 1 : \n" + UserEntityTest.objConst1);
+	@DisplayName(value = "Construct One")
+	void testConstructOne() {
+		UserEntityTest.LOG.info("\n\t[OK] : El Constructor One es:" + UserEntityTest.objConst1);
 		Assertions.assertTrue(Boolean.TRUE);
 	}
 
@@ -90,12 +80,29 @@ class UserEntityTest {
 	 */
 	@Test
 	@Tag(value = "Constructs")
-	@DisplayName(value = "Construct 2")
-	void testUserEntityIntegerStringStringStringEUserRolBooleanLocalDateTime() throws Exception {
-		UserEntityTest.LOG.debug("Construct 2 : \n" + UserEntityTest.objConst2);
+	@DisplayName(value = "Construct Second")
+	void testConstructSecond() {
+		UserEntityTest.LOG.info("\n\t[OK] : El Constructor Second es:" + UserEntityTest.objConst2);
 		Assertions.assertTrue(Boolean.TRUE);
 	}
 
+	/* GETTERS AND SETTERS */
+	@Test
+	@Tag(value = "GettersSetters")
+	@DisplayName(value = "Getters and Setters")
+	void testGetterAndSetter() {
+		final UserEntity user = new UserEntity();
+		user.setId(UserEntityTest.objConst2.getId());
+		user.setUsername(UserEntityTest.objConst2.getUsername());
+		user.setPassword(UserEntityTest.objConst2.getPassword());
+		user.setAlias(UserEntityTest.objConst2.getAlias());
+		user.setRol(UserEntityTest.objConst2.getRol());
+		user.setActive(UserEntityTest.objConst2.isActive());
+		user.setLastAccess(UserEntityTest.objConst2.getLastAccess());
+		Assertions.assertTrue(Boolean.TRUE);
+	}
+
+	/* METHODS OF INSTANCE */
 	/**
 	 * Test to string.
 	 *
@@ -103,7 +110,7 @@ class UserEntityTest {
 	 */
 	@Test
 	@Tag(value = "Methods Instance")
-	@DisplayName(value = "To String")
+	@DisplayName(value = "ToString")
 	void testToString() throws Exception {
 		UserEntityTest.LOG.debug("testToString : \n" + UserEntityTest.objConst2);
 		Assertions.assertTrue(Boolean.TRUE);

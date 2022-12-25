@@ -33,11 +33,11 @@ public class ContactRequestConverter implements Converter<Contact, ContactEntity
 			entity.setPhoneHome(source.getPhoneHome());
 			return entity;
 		} catch (final NullPointerException e) {
-			ContactRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
-			throw new NullPointerException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			ContactRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
+			throw new NullPointerException(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 		} catch (final IllegalArgumentException e) {
-			ContactRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
-			throw new IllegalArgumentException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			ContactRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
+			throw new IllegalArgumentException(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 		}
 	}
 

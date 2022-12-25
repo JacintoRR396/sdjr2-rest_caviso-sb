@@ -37,11 +37,11 @@ public class AddressRequestConverter implements Converter<Address, AddressEntity
 			entity.setAdditionalInfo(source.getAdditionalInfo());
 			return entity;
 		} catch (final NullPointerException e) {
-			AddressRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
-			throw new NullPointerException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			AddressRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
+			throw new NullPointerException(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 		} catch (final IllegalArgumentException e) {
-			AddressRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
-			throw new IllegalArgumentException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			AddressRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
+			throw new IllegalArgumentException(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 		}
 	}
 

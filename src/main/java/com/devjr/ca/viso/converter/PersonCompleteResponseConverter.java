@@ -11,7 +11,6 @@ import com.devjr.ca.viso.domain.Contact;
 import com.devjr.ca.viso.domain.PersonComplete;
 import com.devjr.ca.viso.entity.PersonCompleteEntity;
 import com.devjr.ca.viso.zutils.UtilsDomain;
-import com.devjr.ca.viso.zutils.UtilsLanguage;
 
 /**
  * Representa al Convertidor entre el Dominio y el DAO respecto a una Persona.
@@ -44,7 +43,7 @@ public class PersonCompleteResponseConverter implements Converter<PersonComplete
 					source.getSurname(), birthdate, source.getBalance(), source.getPathImage(), source.getDescription(),
 					address, contact);
 		} catch (final IllegalArgumentException e) {
-			PersonCompleteResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
+			// PersonCompleteResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
 			return null;
 		}
 	}

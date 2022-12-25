@@ -11,7 +11,7 @@ import com.devjr.ca.viso.repository.entity.UserEntity;
 import com.devjr.ca.viso.service.domain.EUserRol;
 
 /**
- * [REPO] JPA Repository for Users .
+ * [REPO] JPA Repository for Users.
  *
  * @author Jacinto R^2
  * @version 1.0

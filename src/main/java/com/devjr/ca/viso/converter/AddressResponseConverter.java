@@ -29,11 +29,11 @@ public class AddressResponseConverter implements Converter<AddressEntity, Addres
 			return new Address(source.getId(), source.getStreet(), source.getNumber(), source.getTown(),
 					source.getCity(), source.getCountry(), source.getPostalCode(), source.getAdditionalInfo());
 		} catch (final NullPointerException e) {
-			AddressResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
-			throw new NullPointerException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			// AddressResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
+			throw new NullPointerException(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 		} catch (final IllegalArgumentException e) {
-			AddressResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
-			throw new IllegalArgumentException(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			// AddressResponseConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_DOMAIN);
+			throw new IllegalArgumentException(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 		}
 	}
 

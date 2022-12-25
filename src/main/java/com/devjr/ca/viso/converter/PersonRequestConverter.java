@@ -38,7 +38,7 @@ public class PersonRequestConverter implements Converter<Person, PersonEntity> {
 			entity.setDescription(source.getDescription());
 			return entity;
 		} catch (final IllegalArgumentException e) {
-			PersonRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_TO_ENTITY);
+			PersonRequestConverter.LOG.info(UtilsLanguage.MSG_ERROR_CONVERT_FROM_DOMAIN_TO_ENTITY);
 			return null;
 		}
 	}
